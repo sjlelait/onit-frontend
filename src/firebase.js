@@ -1,13 +1,6 @@
 // Import the functions you need from the SDKs you need
-import {
-    initializeApp
-} from 'firebase/app';
-import {
-    GoogleAuthProvider,
-    signInWithPopup,
-    signOut,
-    getAuth
-} from 'firebase/auth'
+import { initializeApp } from 'firebase/app';
+import { GoogleAuthProvider, signInWithPopup, signOut, getAuth } from 'firebase/auth';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -19,7 +12,7 @@ const firebaseConfig = {
     storageBucket: "onit-f8dae.appspot.com",
     messagingSenderId: "979218135476",
     appId: "1:979218135476:web:aa4fe90edf3c9f0e581ae1"
-};
+  };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
