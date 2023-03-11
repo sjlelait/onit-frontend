@@ -2,10 +2,13 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 function Index(props) {
   const loaded = () => {
-    return props.tasks.map((task) => (
-      <div key={task._id} className='task'>
-        <Link to={`/tasks/${task._id}`}>
-          <p>{task.category}</p>
+    const categories = props.tasks.map((task) => task.category);
+    const uniqueCategories = [...new Set(categories)];
+    return uniqueCategories.map((category) => (
+      <div key={category} className='task'>
+        {console.log(categories)}
+        <Link to={`/tasks/${category}`}>
+          <p>{category}</p>
         </Link>
       </div>
     ));
