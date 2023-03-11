@@ -1,5 +1,21 @@
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 function Index(props) {
-    return <h1>Index</h1>;
-  }
-  
-  export default Index;
+  const loaded = () => {
+    return props.tasks.map((task) => (
+      <div key={task._id} className='task'>
+        <Link to={`/tasks/${task._id}`}>
+          <p>{task.title}</p>
+        </Link>
+      </div>
+    ));
+  };
+
+  const loading = () => {
+    return <h1>Loading...</h1>;
+  };
+
+  return props.tasks ? loaded() : loading();
+}
+
+export default Index;
