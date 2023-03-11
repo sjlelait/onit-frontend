@@ -5,7 +5,7 @@ function Index(props) {
     return props.tasks.map((task) => (
       <div key={task._id} className='task'>
         <Link to={`/tasks/${task._id}`}>
-          <p>{task.title}</p>
+          <p>{task.category}</p>
         </Link>
       </div>
     ));

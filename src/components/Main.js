@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Index from '../pages/Index';
@@ -37,7 +38,7 @@ function Main(props) {
     <main>
       <Routes>
         <Route path='/' element={<Index user={props.user} tasks={tasks} />} />
-        <Route path='/tasks/:id' element={<ShowList />} />
+        <Route path='/tasks/:id' element={<ShowList tasks={tasks} />} />
         <Route path='/tasks/:id/subtasks' element={<ShowTask />} />
       </Routes>
     </main>
