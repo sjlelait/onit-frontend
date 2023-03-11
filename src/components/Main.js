@@ -33,14 +33,14 @@ function Main(props) {
   }, [props.user]);
 
   // This ends here
-  return ( 
-  <main>
-    <Routes>
-      <Route path="/" element={<Index />} />
-      <Route path="/tasks/:id" element={<ShowList />} />
-      <Route path="/tasks/:id/subtasks" element={<ShowTask />} />
-    </Routes>
-  </main>
+  return (
+    <main>
+      <Routes>
+        <Route path='/' element={<Index user={props.user} tasks={tasks} />} />
+        <Route path='/tasks/:id' element={<ShowList />} />
+        <Route path='/tasks/:id/subtasks' element={<ShowTask />} />
+      </Routes>
+    </main>
   );
 }
 
