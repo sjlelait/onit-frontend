@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
+import Index from '../pages/Index';
 
 
 function Main(props) {
@@ -31,7 +32,13 @@ function Main(props) {
   }, [props.user]);
 
   // This ends here
-  return <h1>Test</h1>;
+  return ( 
+  <main>
+    <Routes>
+      <Route path="/" element={<Index />} />
+    </Routes>
+  </main>
+  );
 }
 
 export default Main;
