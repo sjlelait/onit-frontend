@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Index from '../pages/Index';
-
+import ShowList from '../pages/ShowList';
 
 function Main(props) {
   // FB - Important! Example of using JWT to confirm a user is authorized
@@ -36,6 +36,7 @@ function Main(props) {
   <main>
     <Routes>
       <Route path="/" element={<Index />} />
+      <Route path="/tasks/:id" element={<ShowList />} />
     </Routes>
   </main>
   );
