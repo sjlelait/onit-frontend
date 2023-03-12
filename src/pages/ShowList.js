@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { Link } from 'react-router-dom';
 
 const ShowList = (props) => {
 
@@ -35,12 +36,16 @@ const ShowList = (props) => {
       <h1>{category} List</h1>
       <ul>
         {list.map((item) => (
+            <Link to={`/tasks/${category}/subtasks`}>
           <li key={item.id}>{item.title}</li>
+          </Link>
         ))}
       </ul>
     </div>
     );
   };
+
+
 
   const loading = () => {
     return <h1>Loading...</h1>;
