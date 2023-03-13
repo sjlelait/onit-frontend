@@ -36,7 +36,7 @@ const ShowList = (props) => {
       <h1>{category} List</h1>
       <ul>
         {list.map((item) => (
-            <Link to={`/tasks/${category}/subtasks`}>
+            <Link to={`/tasks/${category}/${item.title}`}>
           <li key={item.id}>{item.title}</li>
           </Link>
         ))}
