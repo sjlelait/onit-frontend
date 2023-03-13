@@ -39,7 +39,7 @@ function Main(props) {
       <Routes>
         <Route path='/' element={<Index user={props.user} tasks={tasks} />} />
         <Route path='/tasks/:category' element={<ShowList tasks={tasks} />} />
-        <Route path='/tasks/:id/subtasks' element={<ShowTask />} />
+        <Route path='/tasks/:category/:item' element={<ShowTask />} />
       </Routes>
     </main>
   );
