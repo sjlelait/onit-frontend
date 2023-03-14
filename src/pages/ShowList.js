@@ -73,7 +73,7 @@ const ShowList = (props) => {
       <h1>{category} List</h1>
       <ul>
         {list.map((item) => (
-            <Link to={`/tasks/${category}/${item.title}`}>
+            <Link to={`/tasks/${item._id}/subtasks`}>
           <li key={item.id}>{item.title} {item.timeframe} {item.important ? 'important' : 'unimportant'} {item.complete ? "done" : "need to do" }</li>
           </Link>
         ))}
