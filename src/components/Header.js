@@ -7,7 +7,7 @@ import Navbar from 'react-bootstrap/Navbar';
 
 function Header(props) {
   return (
-    <Navbar collapseOnSelect expand="false" bg="light" variant="light">
+    <Navbar collapseOnSelect expand="false" bg="success" variant="dark">
       <Navbar.Brand href="/home">Onit Home</Navbar.Brand>
       { props.user ?
         <>
@@ -27,8 +27,8 @@ function Header(props) {
           <Nav.Link onClick={logout}>Logout</Nav.Link>  
         </Nav>        
       </Navbar.Collapse>
-      </>
-      :
+        </>
+        :
       <Nav.Link onClick={login}>Login</Nav.Link>
       }
     </Navbar>
