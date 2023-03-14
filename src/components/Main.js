@@ -1,36 +1,48 @@
-import { useEffect } from "react";
+
+import { useEffect, useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import Index from '../pages/Index';
+import ShowList from '../pages/ShowList';
+import ShowTask from '../pages/ShowTask';
 
 function Main(props) {
+  // FB - Important! Example of using JWT to confirm a user is authorized
+  //FB - This is a hypothetical request that has the neceesary token authorization components that are demonstrated at the end of the part 2 video.
 
-  // FB - Important! Example of usint JWT to confirm a user is authorized
+  const [tasks, setTasks] = useState(null);
+  const API_URL = 'http://localhost:3001/home';
 
-  const getList = async() => {
-  
-    const API_URL = 'http://localhost:3001/list'
+  const getTask = async () => {
     let token;
 
-    if(props.user){
+    if (props.user) {
       token = await props.user.getIdToken();
       const response = await fetch(API_URL, {
         method: 'GET',
         headers: {
-          'Authorization': 'Bearer ' + token
-        }
+          Authorization: 'Bearer ' + token,
+        },
       });
       const data = await response.json();
-      // setList(data);
-        }
+      setTasks(data);
+      console.log(data);
     }
+  };
 
-    useEffect(() => {
-      getList();
-    }, [props.user]);
+  useEffect(() => {
+    getTask();
+  }, [props.user]);
 
-// This ends here
-    return (
-     <h1>Test</h1>
-    )
-  }
-  
-  export default Main;
-  
+  // This ends here
+  return (
+    <main>
+      <Routes>
+        <Route path='/' element={<Index user={props.user} tasks={tasks} />} />
+        <Route path='/tasks/:category' element={<ShowList tasks={tasks} />} />
+        <Route path='/tasks/:taskId/subtasks' element={<ShowTask />} />
+      </Routes>
+    </main>
+  );
+}
+
+export default Main;
