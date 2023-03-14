@@ -13,6 +13,14 @@ const ShowList = (props) => {
 
   // State to hold the list data
   const [list, setList] = useState(null);
+  const [newForm, setNewForm] = useState({
+    title: '',
+    category: `${category}`,
+    timeframe: '',
+    // important: '',
+  });
+  
+  
 
   // fetch category data
   const getList = async () => {
@@ -20,13 +28,44 @@ const ShowList = (props) => {
     const data = await response.json();
     console.log(data)
     setList(data);
-   
+  }
+
+  const createTask = async (item) => {
+    try {
+      await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'Application/json',
+        },
+        body: JSON.stringify(item),
+      });
+      getList();
+    } catch (error) {
+      // TODO: Add a task we wish to perform in the event of an error
+    }
   }
 
   useEffect(() => {
     getList();
   }, []);
 
+
+  const handleChange = (event) => {
+    setNewForm((prevState) => ({
+      ...prevState,
+      [event.target.name]: event.target.value,
+    }));
+  }
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    createTask(newForm);
+    setNewForm({
+      title: '',
+      category: `${category}`,
+      timeframe: '',
+    //   important: '',
+    });
+  };
 
 
   //Loaded function for when data is fetched
@@ -37,7 +76,7 @@ const ShowList = (props) => {
       <ul>
         {list.map((item) => (
             <Link to={`/tasks/${category}/${item.title}`}>
-          <li key={item.id}>{item.title}</li>
+          <li key={item.id}>{item.title} {item.timeframe} {item.important ? 'important' : 'unimportant'}</li>
           </Link>
         ))}
       </ul>
@@ -51,7 +90,38 @@ const ShowList = (props) => {
     return <h1>Loading...</h1>;
   };
  
-  return list ? loaded() : loading();
+  return (
+    <section className="task-section">
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          value={newForm.title}
+          name="title"
+          placeholder="name"
+          onChange={handleChange}
+        />
+         <input
+          type="text"
+          value={newForm.timeframe}
+          name="timeframe"
+          placeholder="time"
+          onChange={handleChange}
+        />
+        <input
+        type="checkbox"
+        checked={newForm.important}
+        name="important"
+        onChange={() => {
+            setNewForm(prevState => ({ ...prevState, important: !prevState.important }));
+        }}
+        />
+<label htmlFor="important">Important?</label>
+
+        <input type="submit" value="Create Task" />
+      </form>
+      {list ? loaded() : loading()}
+    </section>
+  );
 
 
 }
