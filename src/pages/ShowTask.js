@@ -10,6 +10,7 @@ const ShowTask = () => {
     const response = await fetch(url);
     const data = await response.json();
     setTask(data);
+    console.log(data)
   };
 
   useEffect(() => {
@@ -21,7 +22,13 @@ const ShowTask = () => {
       <div>
         <h1>{task.title}</h1>
         <p>{task.description}</p>
-        <p>{task.subtask[0].name}</p>
+        {task.subtask && task.subtask.length > 0 ? (
+          task.subtask.map((subtask) => (
+            <p key={subtask.id}>{subtask.name}</p>
+          ))
+        ) : (
+          <p>No subtasks found.</p>
+        )}
         {console.log(task)}
       </div>
     );
