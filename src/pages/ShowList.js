@@ -16,8 +16,7 @@ const ShowList = (props) => {
   const [newForm, setNewForm] = useState({
     title: '',
     category: `${category}`,
-    timeframe: '',
-    // important: '',
+    timeframe: '00:00', //must change model to accept string
   });
   
   
@@ -63,7 +62,6 @@ const ShowList = (props) => {
       title: '',
       category: `${category}`,
       timeframe: '',
-    //   important: '',
     });
   };
 
@@ -76,7 +74,7 @@ const ShowList = (props) => {
       <ul>
         {list.map((item) => (
             <Link to={`/tasks/${category}/${item.title}`}>
-          <li key={item.id}>{item.title} {item.timeframe} {item.important ? 'important' : 'unimportant'}</li>
+          <li key={item.id}>{item.title} {item.timeframe} {item.important ? 'important' : 'unimportant'} {item.complete ? "done" : "need to do" }</li>
           </Link>
         ))}
       </ul>
@@ -92,6 +90,7 @@ const ShowList = (props) => {
  
   return (
     <section className="task-section">
+        {list ? loaded() : loading()}
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -104,7 +103,7 @@ const ShowList = (props) => {
           type="text"
           value={newForm.timeframe}
           name="timeframe"
-          placeholder="time"
+          placeholder="00:00"
           onChange={handleChange}
         />
         <input
@@ -115,11 +114,10 @@ const ShowList = (props) => {
             setNewForm(prevState => ({ ...prevState, important: !prevState.important }));
         }}
         />
-<label htmlFor="important">Important?</label>
-
+        <label htmlFor="important">Important?</label>
         <input type="submit" value="Create Task" />
       </form>
-      {list ? loaded() : loading()}
+    
     </section>
   );
 
