@@ -4,6 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 import Index from '../pages/Index';
 import ShowList from '../pages/ShowList';
 import ShowTask from '../pages/ShowTask';
+import ShowImportant from '../pages/ShowImportant';
 
 function Main(props) {
   // FB - Important! Example of using JWT to confirm a user is authorized
@@ -42,6 +43,7 @@ function Main(props) {
         <Route path='/' element={<Index user={props.user} tasks={tasks} />} />
         <Route path='/tasks/:category' element={<ShowList tasks={tasks} />} />
         <Route path='/tasks/:taskId/subtasks' element={<ShowTask />} />
+        <Route path='/tasks/important' element={<ShowImportant /> } />
       </Routes>
     </main>
   );
