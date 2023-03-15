@@ -23,7 +23,7 @@ function Index(props) {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ category: category, title: title }),
+        body: JSON.stringify({ category: category, title: title || 'Untitled' }),
       });
       const data = await response.json();
       console.log('Response from server:', data);
@@ -73,20 +73,20 @@ function Index(props) {
     <>
       <div>
         <form onSubmit={handleSubmit}>
-          <label htmlFor='category'>Category Title:</label>
+          <label htmlFor='category'>Category &nbsp;</label>
           <input
             type='text'
             name='category'
             value={category}
             onChange={handleChange}
           />
-          <label htmlFor='title'>Title:</label>
+          {/* <label htmlFor='title'>Title:</label>
           <input
             type='text'
             name='title'
             value={title}
             onChange={handleChange}
-          />
+          /> */}
           <input type='submit' value='Create Category' />
         </form>
       </div>
