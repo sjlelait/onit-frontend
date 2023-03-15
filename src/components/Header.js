@@ -1,14 +1,21 @@
-import { login, logout } from '../firebase';
 import { Link } from 'react-router-dom';
+import { login, logout } from '../firebase';
+import { useState } from 'react';  
 
 // bootstrap nav
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
+import { Navbar, Nav } from 'react-bootstrap';
 
 function Header(props) {
+  // state to toggle menu off
+  const [expanded, setExpanded] = useState(false);
+
+  const handleLinkClick = () => {
+    setExpanded(false);
+  }
+
   return (
-    <Navbar collapseOnSelect expand="false" bg="success" variant="dark">
-      <Navbar.Brand href="/home">Onit Home</Navbar.Brand>
+    <Navbar expanded={expanded} onToggle={setExpanded} expand="false" bg="success" variant="dark">
+      <Navbar.Brand as={Link} to="/">Onit Home</Navbar.Brand>
       { props.user ?
         <>
         <span class="navbar-text">
@@ -19,11 +26,11 @@ function Header(props) {
             />
           </h5>
         </span>                
-      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <Navbar.Toggle aria-controls="basic-navbar-nav"/>
       <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="mr-auto">
-          <Nav.Link href="/tasks/important">Important</Nav.Link>
-          <Nav.Link href="/tasks/new">Add New List</Nav.Link>
+        <Nav className="mr-auto" onClick={handleLinkClick}>
+          <Nav.Link as={Link} to="/tasks/important">Important Tasks</Nav.Link>
+          <Nav.Link as={Link} to="/tasks/new">New Task</Nav.Link>
           <Nav.Link onClick={logout}>Logout</Nav.Link>  
         </Nav>        
       </Navbar.Collapse>
@@ -33,4 +40,5 @@ function Header(props) {
       }
     </Navbar>
       )}
+
 export default Header;
