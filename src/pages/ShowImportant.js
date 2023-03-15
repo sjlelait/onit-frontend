@@ -19,13 +19,11 @@ const loaded = () => {
   return (
     <div>
       <h1>Important Tasks</h1>
-      <ul>
         {task.map(task => (
-          <li key={task._id}>
+          <p key={task._id}>
             <Link to={`/tasks/${task._id}/subtasks`}>{task.title}</Link>
-          </li>
+          </p>
         ))}
-      </ul>
     </div>
   );
 }
