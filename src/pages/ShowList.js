@@ -65,6 +65,32 @@ const ShowList = (props) => {
     });
   };
 
+  const handleClick = (task) => {
+    setList((list) => {
+      const listsCopy = [...list];
+      const foundListIndex = listsCopy.findIndex((l) => l._id === task._id);
+      const listCopy = listsCopy[foundListIndex];
+      listsCopy.splice(foundListIndex, 1, {
+        ...listCopy,
+        important: !listCopy.important
+      });
+      return listsCopy;
+    });
+  };
+
+  const handleClickComplete = (task) => {
+    setList((list) => {
+      const listsCopy = [...list];
+      const foundListIndex = listsCopy.findIndex((l) => l._id === task._id);
+      const listCopy = listsCopy[foundListIndex];
+      listsCopy.splice(foundListIndex, 1, {
+        ...listCopy,
+        complete: !listCopy.complete
+      });
+      return listsCopy;
+    });
+  };
+
 
   //Loaded function for when data is fetched
   const loaded = () => {
@@ -72,12 +98,27 @@ const ShowList = (props) => {
         <div>
       <h1>{category} List</h1>
       <ul>
-        {list.map((item) => (
+        {list.map((item, index) => (
+            <section>
+
+
+        important: {`${item.important}`}
+        <button onClick={() => handleClick(item)}>
+          {item.important ? "true" : "false"}
+        </button>
+        complete: {`${item.complete}`}
+        <button onClick={() => handleClickComplete(item)}>
+          {item.complete ? "true" : "false"}
+        </button>
+
             <Link to={`/tasks/${item._id}/subtasks`}>
-          <li key={item.id}>{item.title} {item.timeframe} {item.important ? 'important' : 'unimportant'} {item.complete ? "done" : "need to do" }</li>
+          <li key={item.id}>{item.title} {item.timeframe} {item.important ? 'important' : 'unimportant'} {item.complete ? "done" : "need to do" }{index} </li>
           </Link>
+         
+          </section>
         ))}
       </ul>
+      
     </div>
     );
   };
@@ -106,15 +147,8 @@ const ShowList = (props) => {
           placeholder="00:00"
           onChange={handleChange}
         />
-        <input
-        type="checkbox"
-        checked={newForm.important}
-        name="important"
-        onChange={() => {
-            setNewForm(prevState => ({ ...prevState, important: !prevState.important }));
-        }}
-        />
-        <label htmlFor="important">Important?</label>
+       
+        
         <input type="submit" value="Create Task" />
       </form>
     
