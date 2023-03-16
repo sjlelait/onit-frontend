@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
-const ShowTask = () => {
+const ShowTask = (props) => {
   const { taskId } = useParams();
   const url = `http://localhost:3001/tasks/${taskId}/subtasks`;
   const [task, setTask] = useState(null);
@@ -10,18 +10,31 @@ const ShowTask = () => {
   });
 
   const getTask = async () => {
-    const response = await fetch(url);
-    const data = await response.json();
-    setTask(data);
-    console.log(data);
+    try {
+      const token = await props.user.getIdToken();
+      const response = await fetch(url, {
+        headers: {
+          'Authorization': 'Bearer ' + token
+        }
+      });
+      const data = await response.json();
+      setTask(data);
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
   };
+  
+  
 
   const createSubtask = async (subtask) => {
     try {
+      const token = await props.user.getIdToken();
       await fetch(url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + token
         },
         body: JSON.stringify(subtask),
       });
@@ -30,6 +43,7 @@ const ShowTask = () => {
       console.error(error);
     }
   };
+  
 
   const handleChange = (event) => {
     setNewSubtask((prevState) => ({
