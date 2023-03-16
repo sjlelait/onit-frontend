@@ -29,8 +29,7 @@ function Index(props) {
           </div>
   );
       }
- };
- 
+ }; 
  
   useEffect(() => {
     async function fetchData() {
