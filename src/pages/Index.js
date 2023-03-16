@@ -19,7 +19,8 @@ function Index(props) {
 
   const quoteapi = () => {
     if (data) {
-      const quote = data[0];
+      const index = Math.floor(Math.random()* data.length);
+      const quote = data[index];
       return (
         <div>
           <div className='quote'>
@@ -29,8 +30,7 @@ function Index(props) {
           </div>
   );
       }
- };
- 
+ }; 
  
   useEffect(() => {
     async function fetchData() {
