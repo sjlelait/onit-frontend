@@ -23,26 +23,40 @@ const ShowList = (props) => {
 
   // fetch category data
   const getList = async () => {
-    const response = await fetch(url);
-    const data = await response.json();
-    console.log(data)
-    setList(data);
-  }
+    try {
+      const token = await props.user.getIdToken();
+      const response = await fetch(url, {
+        headers: {
+          'Authorization': 'Bearer ' + token
+        }
+      });
+      const data = await response.json();
+      console.log(data);
+      setList(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
+  
 
   const createTask = async (item) => {
     try {
+      const token = await props.user.getIdToken();
       await fetch(url, {
         method: 'POST',
         headers: {
-          'Content-Type': 'Application/json',
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + token
         },
         body: JSON.stringify(item),
       });
       getList();
     } catch (error) {
-      // TODO: Add a task we wish to perform in the event of an error
+      console.log(error);
     }
-  }
+  };
+  
 
   useEffect(() => {
     getList();

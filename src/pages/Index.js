@@ -18,10 +18,12 @@ function Index(props) {
     event.preventDefault();
     console.log('Submitting form with category:', category, 'and title:', title);
     try {
+      const token = await props.user.getIdToken();
       const response = await fetch('http://localhost:3001/tasks', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + token
         },
         body: JSON.stringify({ category: category, title: title || 'Untitled' }),
       });
@@ -35,12 +37,18 @@ function Index(props) {
     }
   };
   
+  
 
   const API_URL = 'http://localhost:3001/home';
 
   const getTasks = async () => {
     try {
-      const response = await fetch(API_URL);
+      const token=await props.user.getIdToken();
+      const response = await fetch(API_URL, {
+        headers: {
+          'Authorization': 'Bearer ' + token
+        },
+      });
       const data = await response.json();
       setTasks(data);
       console.log(data);
@@ -48,10 +56,14 @@ function Index(props) {
       console.log(error);
     }
   };
+  
 
   useEffect(() => {
-    getTasks();
-  }, []);
+    if (props.user) {
+      getTasks();
+    }
+  }, [props.user]);
+  
 
   const loaded = () => {
     const categories = tasks.map((task) => task.category);
@@ -71,6 +83,14 @@ function Index(props) {
 
   return (
     <>
+    {
+      !props.user ?
+      <h1>Please Login</h1>
+      :
+      <section>
+    
+   
+   
       <div>
         <form onSubmit={handleSubmit}>
           <label htmlFor='category'>Category &nbsp;</label>
@@ -91,7 +111,10 @@ function Index(props) {
         </form>
       </div>
       <div>{tasks ? loaded() : loading()}</div>
+      </section>
+}
     </>
+            
   );
 }
 
