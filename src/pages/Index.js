@@ -6,6 +6,7 @@ function Index(props) {
   const [category, setCategory] = useState('');
   const [title, setTitle] = useState('');
 
+
   const api_url = "https://type.fit/api/quotes";
 
   async function getapi(url) {
@@ -38,7 +39,6 @@ function Index(props) {
     }
     fetchData();
   }, []);
- 
 
   const handleChange = (event) => {
     if (event.target.name === 'category') {
@@ -124,7 +124,9 @@ function Index(props) {
           <input type='submit' value='Create Category' />
         </form>
       </div>
+
       <div>{quoteapi()}</div>
+
       <div>{tasks ? loaded() : loading()}</div>
     </>
   );
