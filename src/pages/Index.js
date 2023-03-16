@@ -6,6 +6,40 @@ function Index(props) {
   const [category, setCategory] = useState('');
   const [title, setTitle] = useState('');
 
+
+  const api_url = "https://type.fit/api/quotes";
+
+  async function getapi(url) {
+    const response = await fetch(url);
+    const data = await response.json();
+    console.log(data);
+    return data;
+ }
+  const [data, setData] = useState(null);
+
+  const quoteapi = () => {
+    if (data) {
+      const quote = data[0];
+      return (
+        <div>
+          <div className='quote'>
+            <p>{quote.text}</p>
+            <p>- {quote.author}</p>
+          </div>
+          </div>
+  );
+      }
+ };
+ 
+ 
+  useEffect(() => {
+    async function fetchData() {
+      const result = await getapi(api_url);
+      setData(result);
+    }
+    fetchData();
+  }, []);
+
   const handleChange = (event) => {
     if (event.target.name === 'category') {
       setCategory(event.target.value);
@@ -90,6 +124,9 @@ function Index(props) {
           <input type='submit' value='Create Category' />
         </form>
       </div>
+
+      <div>{quoteapi()}</div>
+
       <div>{tasks ? loaded() : loading()}</div>
     </>
   );

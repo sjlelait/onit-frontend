@@ -1,4 +1,7 @@
 {
+<<<<<<< HEAD
+    "editor.smoothScrolling": true
+=======
     "workbench.colorCustomizations": {
         "activityBar.activeBackground": "#3333ff",
         "activityBar.background": "#3333ff",
@@ -19,4 +22,5 @@
         "titleBar.inactiveForeground": "#e7e7e799"
     },
     "peacock.color": "blue"
+>>>>>>> main
 }
