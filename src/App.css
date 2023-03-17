@@ -1,3 +1,19 @@
+:root {
+  --bg-green: #004643;
+  --btn-yellow: #f9bc60;
+  --btn-fontcolor: #001e1d;
+  --forum-seamoss: #abd1c6;
+  --space-grey: #e8e4e6;
+}
+
+html {
+  background: var(--bg-green);
+}
+
+body{
+  font-family: 'Montserrat';
+}
+
 .App {
   text-align: center;
 }
@@ -36,3 +52,5 @@
     transform: rotate(360deg);
   }
 }
+
+
