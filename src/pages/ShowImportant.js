@@ -2,20 +2,26 @@ import { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import Ellipses from "../components/Ellipses";
 
-const ShowImportant = () => {
-    const url = "http://localhost:3001/tasks/important";
-    const [task, setTask] = useState([]);
+const ShowImportant = (props) => {
+  const url = "http://localhost:3001/tasks/important";
+  const [task, setTask] = useState([]);
 
- const getTask = async () => {
-      const response = await fetch(url);
-      const data = await response.json();
-      setTask(data);
-    };
+  const getTask = async () => {
+    const token = await props.user.getIdToken();
+    const response = await fetch(url, {
+      headers: {
+        'Authorization': 'Bearer ' + token
+      }
+    });
+    const data = await response.json();
+    setTask(data);
+  };
 
   useEffect(() => {
-    getTask();
-  }, []);
-
+    if (props.user) {
+      getTask();
+    }
+  }, [props.user]);
   
   // functions to handle delete & edit
 const handleDelete = (itemId) => {
@@ -50,17 +56,15 @@ const loaded = () => {
             <Ellipses itemId={task._id} onDelete={handleDelete} onEdit={handleEdit} />
           </p>
         ))}
-    </div>
-  );
-}
-const loading = () => {
+      </div>
+    );
+  };
+
+  const loading = () => {
     return <h1>Loading...</h1>;
   };
+
   return task ? loaded() : loading();
-}
+};
 
 export default ShowImportant;
-  
-  
-
-  
