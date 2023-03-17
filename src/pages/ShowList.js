@@ -127,6 +127,10 @@ const handleClickComplete = async (task) => {
     console.log(error);
   }
 };
+<<<<<<< HEAD
+=======
+
+>>>>>>> main
 
 
   //Loaded function for when data is fetched
