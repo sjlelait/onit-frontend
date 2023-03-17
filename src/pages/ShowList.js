@@ -8,15 +8,14 @@ const ShowList = (props) => {
 
   const { category } = useParams();
 
-  const url = ` http://localhost:3001/tasks/${category}`;
-
+  const url = `http://localhost:3001/tasks/${category}`;
 
   // State to hold the list data
   const [list, setList] = useState(null);
   const [newForm, setNewForm] = useState({
     title: '',
     category: `${category}`,
-    timeframe: '00:00', //must change model to accept string
+    timeframe: '00:00',
   });
   
   
@@ -47,7 +46,6 @@ const ShowList = (props) => {
   useEffect(() => {
     getList();
   }, []);
-
 
   const handleChange = (event) => {
     setNewForm((prevState) => ({
@@ -91,12 +89,9 @@ const ShowList = (props) => {
     });
   };
 
-
   //Loaded function for when data is fetched
   const loaded = () => {
     return (
-        <div>
-      <h1>{category} List</h1>
       <ul>
         {list.map((item, index) => (
             <section>
@@ -118,9 +113,10 @@ const ShowList = (props) => {
           </section>
         ))}
       </ul>
-      
-    </div>
+    
+
     );
+    
   };
 
 
@@ -156,7 +152,6 @@ const ShowList = (props) => {
   );
 
 
-}
+};
 
   export default ShowList;
-
