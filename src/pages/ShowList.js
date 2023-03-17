@@ -136,29 +136,35 @@ const handleClickComplete = async (task) => {
   const loaded = () => {
     return (
         <div>
-      <h1>{category} List</h1>
-      <ul>
+          <table>
+            <tr>
+      <th>{category} List</th>
+      </tr>
+      {/* <ul> */}
         {list.map((item, index) => (
             <section>
 
 
-        important: {`${item.important}`}
-        <button onClick={() => handleClick(item)}>
-          {item.important ? "true" : "false"}
+        <tr>
+       
+        
+        <td><input type="checkbox" onClick={() => handleClickComplete(item)}/></td>
+        <td><button onClick={() => handleClick(item)}>
+          {item.important ? "★" : "☆"}
         </button>
-        complete: {`${item.complete}`}
-        <button onClick={() => handleClickComplete(item)}>
-          {item.complete ? "true" : "false"}
-        </button>
-
+        </td>
+        
+          <td>
             <Link to={`/tasks/${item._id}/subtasks`}>
-          <li key={item.id}>{item.title} {item.timeframe} {item.important ? 'important' : 'unimportant'} {item.complete ? "done" : "need to do" }{index} </li>
+          <p key={item.id}>{item.title} {item.timeframe} {item.important ? 'important' : 'unimportant'} {item.complete ? "done" : "need to do" }{index} </p>
           </Link>
-         
+        
+          </td>
+          </tr>
           </section>
         ))}
-      </ul>
-      
+      {/* </ul> */}
+      </table>
     </div>
     );
   };
@@ -170,6 +176,7 @@ const handleClickComplete = async (task) => {
   };
  
   return (
+    
     <section className="task-section">
         {list ? loaded() : loading()}
       <form onSubmit={handleSubmit}>
