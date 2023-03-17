@@ -33,7 +33,11 @@ function Main(props) {
  
 
   useEffect(() => {
+    if(props.user) {
     getTask();
+    } else {
+      setTasks(null);
+    }
   }, [props.user]);
 
   // This ends here
@@ -41,9 +45,9 @@ function Main(props) {
     <main>
       <Routes>
         <Route path='/' element={<Index user={props.user} tasks={tasks} />} />
-        <Route path='/tasks/:category' element={<ShowList tasks={tasks} />} />
-        <Route path='/tasks/:taskId/subtasks' element={<ShowTask />} />
-        <Route path='/tasks/important' element={<ShowImportant /> } />
+        <Route path='/tasks/:category' element={<ShowList user={props.user} tasks={tasks} />} />
+        <Route path='/tasks/:taskId/subtasks' element={<ShowTask user={props.user} />} />
+        <Route path='/tasks/important' element={<ShowImportant user={props.user} /> } />
       </Routes>
     </main>
   );

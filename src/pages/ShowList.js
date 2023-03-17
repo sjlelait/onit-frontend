@@ -22,26 +22,40 @@ const ShowList = (props) => {
 
   // fetch category data
   const getList = async () => {
-    const response = await fetch(url);
-    const data = await response.json();
-    console.log(data)
-    setList(data);
-  }
+    try {
+      const token = await props.user.getIdToken();
+      const response = await fetch(url, {
+        headers: {
+          'Authorization': 'Bearer ' + token
+        }
+      });
+      const data = await response.json();
+      console.log(data);
+      setList(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
+  
 
   const createTask = async (item) => {
     try {
+      const token = await props.user.getIdToken();
       await fetch(url, {
         method: 'POST',
         headers: {
-          'Content-Type': 'Application/json',
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + token
         },
         body: JSON.stringify(item),
       });
       getList();
     } catch (error) {
-      // TODO: Add a task we wish to perform in the event of an error
+      console.log(error);
     }
-  }
+  };
+  
 
   useEffect(() => {
     getList();
@@ -63,31 +77,57 @@ const ShowList = (props) => {
     });
   };
 
-  const handleClick = (task) => {
-    setList((list) => {
-      const listsCopy = [...list];
-      const foundListIndex = listsCopy.findIndex((l) => l._id === task._id);
-      const listCopy = listsCopy[foundListIndex];
-      listsCopy.splice(foundListIndex, 1, {
-        ...listCopy,
-        important: !listCopy.important
-      });
-      return listsCopy;
-    });
-  };
+  const handleClick = async (task) => {
+  const updatedTask = { ...task, important: !task.important };
 
-  const handleClickComplete = (task) => {
+  try {
+    const token = await props.user.getIdToken();
+    await fetch(`http://localhost:3001/tasks/${task._id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      },
+      body: JSON.stringify(updatedTask),
+    });
     setList((list) => {
       const listsCopy = [...list];
       const foundListIndex = listsCopy.findIndex((l) => l._id === task._id);
       const listCopy = listsCopy[foundListIndex];
-      listsCopy.splice(foundListIndex, 1, {
-        ...listCopy,
-        complete: !listCopy.complete
-      });
+      listsCopy.splice(foundListIndex, 1, updatedTask);
       return listsCopy;
     });
-  };
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
+const handleClickComplete = async (task) => {
+  const updatedTask = { ...task, complete: !task.complete };
+
+  try {
+    const token = await props.user.getIdToken();
+    await fetch(`http://localhost:3001/tasks/${task._id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      },
+      body: JSON.stringify(updatedTask),
+    });
+    setList((list) => {
+      const listsCopy = [...list];
+      const foundListIndex = listsCopy.findIndex((l) => l._id === task._id);
+      const listCopy = listsCopy[foundListIndex];
+      listsCopy.splice(foundListIndex, 1, updatedTask);
+      return listsCopy;
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 
   //Loaded function for when data is fetched
   const loaded = () => {
