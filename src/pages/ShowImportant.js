@@ -22,6 +22,7 @@ const handleDelete = (itemId) => {
   setTask(task.filter((task) => task._id !== itemId));
 };
 
+    // not working quite yet
 const handleEdit = async (itemId, newData) => {
   try {
     const updatedTask = await Promise.all(
