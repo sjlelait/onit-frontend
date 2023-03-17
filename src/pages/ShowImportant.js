@@ -18,10 +18,12 @@ const ShowImportant = (props) => {
   };
 
   useEffect(() => {
+    console.log('User object in ShowImportant:', props.user);
     if (props.user) {
       getTask();
     }
   }, [props.user]);
+  
   
   // functions to handle delete & edit
 const handleDelete = (itemId) => {
@@ -53,7 +55,7 @@ const loaded = () => {
         {task.map(task => (
           <p key={task._id}>
             <Link to={`/tasks/${task._id}/subtasks`}>{task.title}</Link>
-            <Ellipses itemId={task._id} onDelete={handleDelete} onEdit={handleEdit} />
+            <Ellipses itemId={task._id} onDelete={handleDelete} onEdit={handleEdit} user={props.user} />
           </p>
         ))}
       </div>
