@@ -79,31 +79,57 @@ const ShowList = (props) => {
     });
   };
 
-  const handleClick = (task) => {
-    setList((list) => {
-      const listsCopy = [...list];
-      const foundListIndex = listsCopy.findIndex((l) => l._id === task._id);
-      const listCopy = listsCopy[foundListIndex];
-      listsCopy.splice(foundListIndex, 1, {
-        ...listCopy,
-        important: !listCopy.important
-      });
-      return listsCopy;
-    });
-  };
+  const handleClick = async (task) => {
+  const updatedTask = { ...task, important: !task.important };
 
-  const handleClickComplete = (task) => {
+  try {
+    const token = await props.user.getIdToken();
+    await fetch(`http://localhost:3001/tasks/${task._id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      },
+      body: JSON.stringify(updatedTask),
+    });
     setList((list) => {
       const listsCopy = [...list];
       const foundListIndex = listsCopy.findIndex((l) => l._id === task._id);
       const listCopy = listsCopy[foundListIndex];
-      listsCopy.splice(foundListIndex, 1, {
-        ...listCopy,
-        complete: !listCopy.complete
-      });
+      listsCopy.splice(foundListIndex, 1, updatedTask);
       return listsCopy;
     });
-  };
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
+const handleClickComplete = async (task) => {
+  const updatedTask = { ...task, complete: !task.complete };
+
+  try {
+    const token = await props.user.getIdToken();
+    await fetch(`http://localhost:3001/tasks/${task._id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      },
+      body: JSON.stringify(updatedTask),
+    });
+    setList((list) => {
+      const listsCopy = [...list];
+      const foundListIndex = listsCopy.findIndex((l) => l._id === task._id);
+      const listCopy = listsCopy[foundListIndex];
+      listsCopy.splice(foundListIndex, 1, updatedTask);
+      return listsCopy;
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 
 
   //Loaded function for when data is fetched
