@@ -165,7 +165,7 @@ const handleDelete = (itemId) => {
     return (
         <div className="container">
           <h1 className="title">{category}</h1>
-          <Table >
+          <Table responsive>
             <thead>
               <tr>
                <th></th>
