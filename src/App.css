@@ -22,6 +22,8 @@ body{
 
 .App {
   text-align: center;
+  font-family: 'Montserrat';
+  background: var(--bg-green);
   max-width: 100%;
   box-sizing: border-box;
 }

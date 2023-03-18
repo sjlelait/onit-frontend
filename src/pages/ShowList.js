@@ -1,10 +1,25 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
+import ProgressBar from 'react-bootstrap/ProgressBar';
+import '../index.css';
 
 const ShowList = (props) => {
 
+  const [completedPercentage, setCompletedPercentage] = useState(0);
+  const [message, setMessage] = useState('loading...');
 
+  function AnimatedExample() {
+    return <div class="progressBar">
+    <ProgressBar animated now={completedPercentage} />
+    </div>;
+  };
+
+  // if (completedPercentage < 100) {
+  //   setMessage(`You are ${completedPercentage}% done with this list. Keep going!`);
+  // } else if (completedPercentage === 100) {
+  //   setMessage("Congratulations, you're all done!");
+  // };
 
   const { category } = useParams();
 
@@ -33,6 +48,10 @@ const ShowList = (props) => {
       const data = await response.json();
       console.log(data);
       setList(data);
+      //for the progress bar 
+      const completedTasks = data.filter(task => task.complete);
+      const percentage = Math.round((completedTasks.length / data.length) * 100);
+      setCompletedPercentage(percentage);
     } catch (error) {
       console.log(error);
     }
@@ -135,7 +154,7 @@ const handleClickComplete = async (task) => {
   //Loaded function for when data is fetched
   const loaded = () => {
     return (
-        <div>
+        <div className="body">
       <h1>{category} List</h1>
       <ul>
         {list.map((item, index) => (
@@ -166,12 +185,14 @@ const handleClickComplete = async (task) => {
 
 
   const loading = () => {
-    return <h1>Loading...</h1>;
+    return <h1 className="h1">Loading...</h1>;
   };
  
   return (
     <section className="task-section">
         {list ? loaded() : loading()}
+        <AnimatedExample />
+        <p>{message}</p>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -187,9 +208,8 @@ const handleClickComplete = async (task) => {
           placeholder="00:00"
           onChange={handleChange}
         />
-       
-        
-        <input type="submit" value="Create Task" />
+
+       <button type="submit">Create Task</button>
       </form>
     
     </section>
@@ -199,4 +219,3 @@ const handleClickComplete = async (task) => {
 }
 
   export default ShowList;
-
