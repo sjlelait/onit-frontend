@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 const ShowTask = (props) => {
   const { taskId } = useParams();
 
-  const url = `http://localhost:3001/tasks/${taskId}/subtasks`;
+  const url = `https://onit-app.herokuapp.com/tasks/${taskId}/subtasks`;
   const [task, setTask] = useState(null);
   const [newSubtask, setNewSubtask] = useState({
     name: '',
@@ -98,6 +98,7 @@ const ShowTask = (props) => {
       console.log(error);
     }
   };
+
 
   const loaded = () => {
     return (

@@ -54,7 +54,7 @@ function Index(props) {
     console.log('Submitting form with category:', category, 'and title:', title);
     try {
       const token = await props.user.getIdToken();
-      const response = await fetch('http://localhost:3001/tasks', {
+      const response = await fetch('https://onit-app.herokuapp.com/tasks', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -74,7 +74,7 @@ function Index(props) {
   
   
 
-  const API_URL = 'http://localhost:3001/home';
+  const API_URL = 'https://onit-app.herokuapp.com/home';
 
   const getTasks = async () => {
     try {
