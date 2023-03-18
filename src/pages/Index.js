@@ -124,7 +124,7 @@ function Index(props) {
            value={category}
            onChange={handleChange}
          />
-         <input id="category" type='submit' value='+' />
+         <input class="index-form-button" id="category" type='submit' value='+' />
        </form>
      </div>
      </>

@@ -169,11 +169,11 @@ ul.button-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: 0 auto; /* Add this to center the container */
+  margin: 0 auto; 
   padding: 0;
   overflow: word-wrap;
   background-color: var(--bg-green);
-  width: 60%; /* Set the width to 50% */
+  width: 60%; 
 }
 
 
@@ -194,13 +194,27 @@ font-size: 30px !important;
 }
 
 .index-form input{
-  width: 80%;
-  padding: 10px;
+  width: 60%;
+  height: 50px;
+  margin: 5px;
   border: 1px solid #ccc;
-  border-radius: 5px 0 0 5px;
+  border-radius: 5px 5px 5px 5px;
+
 }
 
+.index-form-button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--btn-yellow);
+  color: black;
+  font-size: 30px;
+  border: 1px solid black;
+  border-radius: 5px 5px 5px 5px;
+  width: 60px; 
+  height: 60px; 
 
+}
 
 /* Responsive Header */
 /* Default styles for mobile devices */
