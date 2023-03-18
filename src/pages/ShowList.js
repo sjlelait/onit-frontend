@@ -17,11 +17,13 @@ const ShowList = (props) => {
     </div>;
   };
 
-  // if (completedPercentage < 100) {
-  //   setMessage(`You are ${completedPercentage}% done with this list. Keep going!`);
-  // } else if (completedPercentage === 100) {
-  //   setMessage("Congratulations, you're all done!");
-  // };
+  useEffect(() => {
+    if (completedPercentage < 100) {
+      setMessage(`You are ${completedPercentage}% done with this list. Keep going!`);
+    } else if (completedPercentage === 100) {
+      setMessage("Congratulations, you're all done!");
+    }
+  }, [completedPercentage]);
 
   const { category } = useParams();
 
