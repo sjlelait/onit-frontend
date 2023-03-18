@@ -13,7 +13,7 @@ const ShowList = (props) => {
 
   function AnimatedExample() {
     return <div class="progressBar">
-    <ProgressBar animated now={completedPercentage} />
+    <ProgressBar animated now={completedPercentage} variant="warning" />
     </div>;
   };
 
@@ -164,7 +164,7 @@ const handleDelete = (itemId) => {
   const loaded = () => {
     return (
         <div className="container">
-          <h1>{category}</h1>
+          <h1 className="title">{category}</h1>
           <Table >
             <thead>
               <tr>
@@ -173,6 +173,7 @@ const handleDelete = (itemId) => {
                <th>Completed</th>
                <th>Important</th>
                <th>Time</th>
+               <th></th>
               </tr>
             </thead>
                 {list.map((item, index) => (
@@ -184,7 +185,7 @@ const handleDelete = (itemId) => {
                  <span className="item-title">{item.title}</span>
                  </Link>
                 </td>
-                <td><input type="checkbox" onClick={() => handleClickComplete(item)}/></td>
+                <td><input className="checkbox" type="checkbox" onClick={() => handleClickComplete(item)}/></td>
                <td><button onClick={() => handleClick(item)}>
                  {item.important ? "★" : "☆"}
                    </button>

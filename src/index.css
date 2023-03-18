@@ -15,10 +15,14 @@ form > input {
 
 form > button {
   background-color: var(--btn-yellow);
-  font-weight: 550;
+  font-weight: 500;
 }
-
+form > button:hover {
+  background-color: var(--bg-green);
+  color: var(--btn-yellow);
+}
 form > button, form > input {
+  color: var(--btn-fontcolor);
   border: 0;
   margin: 2px;
   height: auto;
@@ -40,4 +44,11 @@ form > button, form > input {
   justify-content: center;
   align-items: center;
   margin: 0 auto;
+}
+.title {
+  font-size: larger !important;
+}
+
+.checkbox {
+  transform: scale(2);
 }
