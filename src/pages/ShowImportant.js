@@ -7,65 +7,56 @@ const ShowImportant = (props) => {
   const [task, setTask] = useState([]);
 
   const getTask = async () => {
-    try {
-      const token = await props.user.getIdToken();
-      const response = await fetch(url, {
-        headers: {
-          'Authorization': 'Bearer ' + token
-        }
-      });
-      const data = await response.json();
-      setTask(data);
-      console.log(data);
-    } catch (error) {
-      console.log(error);
-    }
+    const token = await props.user.getIdToken();
+    const response = await fetch(url, {
+      headers: {
+        'Authorization': 'Bearer ' + token
+      }
+    });
+    const data = await response.json();
+    setTask(data);
   };
 
   useEffect(() => {
+    console.log('User object in ShowImportant:', props.user);
     if (props.user) {
       getTask();
     }
   }, [props.user]);
   
   
-  // function to handle delete 
+  // functions to handle delete & edit
 const handleDelete = (itemId) => {
   setTask(task.filter((task) => task._id !== itemId));
 };
 
-    // handle edit
-    const handleEdit = async (itemId, newData) => {
-      try {
-        const token = await props.user.getIdToken();
-        const response = await fetch(`http://localhost:3001/tasks/${itemId}`, {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + token
-          },
-          body: JSON.stringify(newData)
-        });
-        const updatedTask = await response.json();
-        setTask(task.map((task) => (task._id === itemId ? updatedTask : task)));
-      } catch (error) {
-        console.error(error);
-      }
-    };
+    // not working quite yet
+const handleEdit = async (itemId, newData) => {
+  try {
+    const updatedTask = await Promise.all(
+      task.map(async (task) => {
+        if (task._id === itemId) {
+          return { ...task, ...newData };
+        } else {
+          return task;
+        }
+      })
+    );
+    setTask(updatedTask);
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 const loaded = () => {
   return (
     <div>
       <h1>Important Tasks</h1>
         {task.map(task => (
-          <div key={task._id}>
+          <p key={task._id}>
             <Link to={`/tasks/${task._id}/subtasks`}>{task.title}</Link>
-            <Ellipses
-              itemId={task._id}
-              onDelete={() => handleDelete(task._id)}
-              onEdit={(newData) => handleEdit(task._id, newData)}
-            />
-          </div>
+            <Ellipses itemId={task._id} onDelete={handleDelete} onEdit={handleEdit} user={props.user} />
+          </p>
         ))}
       </div>
     );
