@@ -3,15 +3,13 @@ import { useState, useEffect } from 'react';
 
 const ShowTask = (props) => {
   const { taskId } = useParams();
+
   const url = `http://localhost:3001/tasks/${taskId}/subtasks`;
   const [task, setTask] = useState(null);
   const [newSubtask, setNewSubtask] = useState({
     name: '',
   });
-  const [isCrossed, setCrossed] = useState({
-    key: '',
-    value: '',
-  })
+ 
 
   const getTask = async () => {
     try {
@@ -72,18 +70,29 @@ const ShowTask = (props) => {
     getTask();
   }, []);
 
-const handleClickComplete = (subtask) => {
+const handleClickComplete = async (subtask) => {
+  console.log(props.user)
+  console.log(subtask)
   const subtasksCopy = [...task.subtask];
+  console.log(subtasksCopy)
   const foundSubtaskIndex = subtasksCopy.findIndex((t) => t._id === subtask._id);
-  subtasksCopy[foundSubtaskIndex] = {
-    ...subtasksCopy[foundSubtaskIndex],
-    complete: !subtasksCopy[foundSubtaskIndex].complete
-  };
-  setTask((prevState) => ({
-    ...prevState,
-    subtask: subtasksCopy
-  }));
+  subtasksCopy[foundSubtaskIndex] = { ...subtasksCopy[foundSubtaskIndex], complete: !subtasksCopy[foundSubtaskIndex].complete };  
+  try {
+    const token = await props.user.getIdToken();
+    await fetch(`http://localhost:3001/tasks/${taskId}/subtasks/${subtask._id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      },
+      body: JSON.stringify(subtasksCopy[foundSubtaskIndex]), 
+    });
+    setTask((prevState) => ({ ...prevState, subtask: subtasksCopy }));
+  } catch (error) {
+    console.log(error);
+  }
 };
+
 
   const loaded = () => {
 
