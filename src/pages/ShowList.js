@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Table from 'react-bootstrap/Table'
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import '../index.css';
+import Ellipses from "../components/Ellipses";
 
 const ShowList = (props) => {
 
@@ -152,7 +153,10 @@ const handleClickComplete = async (task) => {
   }
 };
 
-
+// function to handle delete 
+const handleDelete = (itemId) => {
+  setList(list.filter((list) => list._id !== itemId));
+};
 
   //Loaded function for when data is fetched
   const loaded = () => {
@@ -182,10 +186,13 @@ const handleClickComplete = async (task) => {
                <td><button onClick={() => handleClick(item)}>
                  {item.important ? "★" : "☆"}
                    </button>
-               </td>
+               </td>               
                 <td>
                  <span className="item-timeframe">{item.timeframe}</span>
                  </td>
+                 <td>
+                  <Ellipses itemId={item._id} onDelete={handleDelete} user={props.user} />
+                </td>
               </tr>
             </tbody>
             ))}
