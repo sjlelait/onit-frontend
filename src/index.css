@@ -11,22 +11,30 @@ code {
 
 form > input {
   background-color: var(--forum-seamoss);
-  border: 0;
-  padding: 10;
-  margin: 2px;
-  height: 35px;
-  width: auto;
-  
-}
-
-form > input > ::placeholder {
- color: var(--btn-fontcolor);
 }
 
 form > button {
   background-color: var(--btn-yellow);
+  font-weight: 550;
+}
+
+form > button, form > input {
   border: 0;
   margin: 2px;
   height: 35px;
   width: auto;
+}
+
+.progressBar {
+  width: 40%;
+}
+
+ul {
+  background-color: var(--space-grey);
+  width: 40%;
+  color: var(--btn-fontcolor);
+}
+
+div {
+  color: var(--forum-seamoss);
 }

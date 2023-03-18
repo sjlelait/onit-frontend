@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import ProgressBar from 'react-bootstrap/ProgressBar';
+import '../index.css';
 
 const ShowList = (props) => {
 
@@ -9,11 +10,13 @@ const ShowList = (props) => {
   const [message, setMessage] = useState('loading...');
 
   function AnimatedExample() {
-    return <ProgressBar animated now={completedPercentage} label={`${completedPercentage}%`} />;
+    return <div class="progressBar">
+    <ProgressBar animated now={completedPercentage} />
+    </div>;
   };
 
-  // //if (completedPercentage < 100) {
-  //   setMessage(`You are ${completedPercentage} done with this list. Keep going!`);
+  // if (completedPercentage < 100) {
+  //   setMessage(`You are ${completedPercentage}% done with this list. Keep going!`);
   // } else if (completedPercentage === 100) {
   //   setMessage("Congratulations, you're all done!");
   // };
@@ -151,7 +154,7 @@ const handleClickComplete = async (task) => {
   //Loaded function for when data is fetched
   const loaded = () => {
     return (
-        <div>
+        <div className="body">
       <h1>{category} List</h1>
       <ul>
         {list.map((item, index) => (
@@ -182,7 +185,7 @@ const handleClickComplete = async (task) => {
 
 
   const loading = () => {
-    return <h1>Loading...</h1>;
+    return <h1 className="h1">Loading...</h1>;
   };
  
   return (
@@ -216,4 +219,3 @@ const handleClickComplete = async (task) => {
 }
 
   export default ShowList;
-

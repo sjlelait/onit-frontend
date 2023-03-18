@@ -68,12 +68,12 @@ const ShowTask = (props) => {
     return (
       <div>
         <h1>{task.title}</h1>
-        <p>{task.description}</p>
+        <ul>{task.description}</ul>
         {task.subtask && task.subtask.length > 0 ? (
           task.subtask.map((subtask) => (
-            <p key={subtask.id}>
+            <ul key={subtask.id}>
               {subtask.name} - {subtask.complete ? 'Complete' : 'Incomplete'}
-            </p>
+            </ul>
           ))
         ) : (
           <p>No subtasks found.</p>
