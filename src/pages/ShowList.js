@@ -13,15 +13,17 @@ const ShowList = (props) => {
 
   function AnimatedExample() {
     return <div class="progressBar">
-    <ProgressBar animated now={completedPercentage} />
+    <ProgressBar animated now={completedPercentage} variant="warning" />
     </div>;
   };
 
-  // if (completedPercentage < 100) {
-  //   setMessage(`You are ${completedPercentage}% done with this list. Keep going!`);
-  // } else if (completedPercentage === 100) {
-  //   setMessage("Congratulations, you're all done!");
-  // };
+  useEffect(() => {
+    if (completedPercentage < 100) {
+      setMessage(`You are ${completedPercentage}% done with this list. Keep going!`);
+    } else if (completedPercentage === 100) {
+      setMessage("Congratulations, you're all done!");
+    }
+  }, [completedPercentage]);
 
   const { category } = useParams();
 
@@ -161,8 +163,8 @@ const handleDelete = (itemId) => {
   //Loaded function for when data is fetched
   const loaded = () => {
     return (
-        <div>
-          <h1>{category}</h1>
+        <div className="container">
+          <h1 className="title">{category}</h1>
           <Table >
             <thead>
               <tr>
@@ -171,6 +173,7 @@ const handleDelete = (itemId) => {
                <th>Completed</th>
                <th>Important</th>
                <th>Time</th>
+               <th></th>
               </tr>
             </thead>
                 {list.map((item, index) => (
@@ -182,7 +185,7 @@ const handleDelete = (itemId) => {
                  <span className="item-title">{item.title}</span>
                  </Link>
                 </td>
-                <td><input type="checkbox" onClick={() => handleClickComplete(item)}/></td>
+                <td><input className="checkbox" type="checkbox" onClick={() => handleClickComplete(item)}/></td>
                <td><button onClick={() => handleClick(item)}>
                  {item.important ? "★" : "☆"}
                    </button>
@@ -207,7 +210,7 @@ const handleDelete = (itemId) => {
  
   return (
     
-    <section className="task-section">
+    <div className="container">
         {list ? loaded() : loading()}
         <AnimatedExample />
         <p>{message}</p>
@@ -231,7 +234,7 @@ const handleDelete = (itemId) => {
        <button type="submit">Create Task</button>
       </form>
     
-    </section>
+    </div>
   );
 
 

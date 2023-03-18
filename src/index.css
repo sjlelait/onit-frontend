@@ -15,26 +15,40 @@ form > input {
 
 form > button {
   background-color: var(--btn-yellow);
-  font-weight: 550;
+  font-weight: 500;
 }
-
+form > button:hover {
+  background-color: var(--bg-green);
+  color: var(--btn-yellow);
+}
 form > button, form > input {
+  color: var(--btn-fontcolor);
   border: 0;
   margin: 2px;
-  height: 35px;
+  height: auto;
   width: auto;
 }
 
 .progressBar {
-  width: 40%;
+  width: 70%;
 }
 
-ul {
+.table {
   background-color: var(--space-grey);
-  width: 40%;
   color: var(--btn-fontcolor);
 }
 
-div {
-  color: var(--forum-seamoss);
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+.title {
+  font-size: larger !important;
+}
+
+.checkbox {
+  transform: scale(2);
 }
