@@ -164,8 +164,16 @@ main {
   font-size: 30px !important;
 }
 
-ul {
+ul.button-container {
   list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto; /* Add this to center the container */
+  padding: 0;
+  overflow: word-wrap;
+  background-color: var(--bg-green);
+  width: 60%; /* Set the width to 50% */
 }
 
 
