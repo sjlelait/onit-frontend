@@ -6,10 +6,17 @@ import ProgressBar from 'react-bootstrap/ProgressBar';
 const ShowList = (props) => {
 
   const [completedPercentage, setCompletedPercentage] = useState(0);
+  const [message, setMessage] = useState('loading...');
 
   function AnimatedExample() {
     return <ProgressBar animated now={completedPercentage} label={`${completedPercentage}%`} />;
-  }
+  };
+
+  // //if (completedPercentage < 100) {
+  //   setMessage(`You are ${completedPercentage} done with this list. Keep going!`);
+  // } else if (completedPercentage === 100) {
+  //   setMessage("Congratulations, you're all done!");
+  // };
 
   const { category } = useParams();
 
@@ -182,6 +189,7 @@ const handleClickComplete = async (task) => {
     <section className="task-section">
         {list ? loaded() : loading()}
         <AnimatedExample />
+        <p>{message}</p>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -197,7 +205,7 @@ const handleClickComplete = async (task) => {
           placeholder="00:00"
           onChange={handleChange}
         />
-        
+
        <button type="submit">Create Task</button>
       </form>
     
