@@ -1,0 +1,4 @@
+<form onSubmit={handleEditTask}>
+                        <input type="text" value={newTaskData} onChange={handleInputChange} />
+                        <button type="submit">Save</button>
+                    </form>

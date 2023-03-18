@@ -53,10 +53,10 @@ const loaded = () => {
     <div>
       <h1>Important Tasks</h1>
         {task.map(task => (
-          <p key={task._id}>
+          <div key={task._id}>
             <Link to={`/tasks/${task._id}/subtasks`}>{task.title}</Link>
             <Ellipses itemId={task._id} onDelete={handleDelete} onEdit={handleEdit} user={props.user} />
-          </p>
+          </div>
         ))}
       </div>
     );
