@@ -315,6 +315,7 @@ ul.button-container {
   }
 }
 
+
 @media (min-width: 1200px) {
   .index-buttons {
     width: calc(20% - 20px); /* Subtract the horizontal padding */
@@ -343,3 +344,67 @@ input::placeholder {
 }
 
 
+/* Responsive table */
+
+/* CSS code for the ShowList component */
+
+/* Default styles for table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  /* Add other styles as needed */
+  padding-top: 20px; /* Add padding to top of table to avoid overlap with progress bar */
+}
+
+/* Default styles for table cells */
+td, th {
+  padding: 8px;
+  border: 1px solid #ddd;
+  /* Add other styles as needed */
+}
+
+/* Media queries for different viewport sizes */
+@media only screen and (min-width: 320px) {
+  /* Styles for viewports 320px and above */
+  td, th {
+    font-size: 12px;
+    padding: 4px;
+  }
+}
+
+@media only screen and (min-width: 480px) {
+  /* Styles for viewports 480px and above */
+  td, th {
+    font-size: 20px;
+    padding: 8px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  /* Styles for viewports 768px and above */
+  td, th {
+    font-size: 25px;
+    padding: 12px;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  /* Styles for viewports 992px and above */
+  td, th {
+    font-size: 30px;
+    padding: 16px;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  /* Styles for viewports 1200px and above */
+  td, th {
+    font-size: 35px;
+    padding: 20px;
+  }
+}
+
+/* CSS for progress bar */
+.progressBar {
+  margin-bottom: 20px; /* Add margin to bottom of progress bar to avoid overlap with table */
+}
