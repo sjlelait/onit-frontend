@@ -21,16 +21,15 @@ form > button {
 form > button, form > input {
   border: 0;
   margin: 2px;
-  height: auto;
+  height: 35px;
   width: auto;
 }
 
 .progressBar {
-  width: 50%;
-  position: relative;
+  width: 40%;
 }
 
-table {
+ul {
   background-color: var(--space-grey);
   width: 40%;
   color: var(--btn-fontcolor);

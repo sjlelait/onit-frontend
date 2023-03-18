@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Table from 'react-bootstrap/Table'
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import '../index.css';
+import Ellipses from "../components/Ellipses";
 
 const ShowList = (props) => {
 
@@ -16,13 +17,11 @@ const ShowList = (props) => {
     </div>;
   };
 
-  useEffect(() => {
-    if (completedPercentage < 100) {
-      setMessage(`You are ${completedPercentage}% done with this list. Keep going!`);
-    } else if (completedPercentage === 100) {
-      setMessage("Congratulations, you're all done!");
-    }
-  }, [completedPercentage]);
+  // if (completedPercentage < 100) {
+  //   setMessage(`You are ${completedPercentage}% done with this list. Keep going!`);
+  // } else if (completedPercentage === 100) {
+  //   setMessage("Congratulations, you're all done!");
+  // };
 
   const { category } = useParams();
 
@@ -154,7 +153,10 @@ const handleClickComplete = async (task) => {
   }
 };
 
-
+// function to handle delete 
+const handleDelete = (itemId) => {
+  setList(list.filter((list) => list._id !== itemId));
+};
 
   //Loaded function for when data is fetched
   const loaded = () => {
@@ -171,26 +173,29 @@ const handleClickComplete = async (task) => {
                <th>Time</th>
               </tr>
             </thead>
-        {list.map((item, index) => (
+                {list.map((item, index) => (
             <tbody>
               <tr>
                <td>{index + 1}</td>
                <td className="flex-container">
-            <Link to={`/tasks/${item._id}/subtasks`}>
+                 <Link to={`/tasks/${item._id}/subtasks`}>
                  <span className="item-title">{item.title}</span>
-          </Link>
+                 </Link>
                 </td>
                 <td><input type="checkbox" onClick={() => handleClickComplete(item)}/></td>
                <td><button onClick={() => handleClick(item)}>
                  {item.important ? "★" : "☆"}
                    </button>
-               </td>
+               </td>               
                 <td>
                  <span className="item-timeframe">{item.timeframe}</span>
                  </td>
+                 <td>
+                  <Ellipses itemId={item._id} onDelete={handleDelete} user={props.user} />
+                </td>
               </tr>
             </tbody>
-        ))}
+            ))}
           </Table>
     </div>
     );
