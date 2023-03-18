@@ -18,7 +18,7 @@ function Header(props) {
       <Navbar.Brand as={Link} to="/">Onit Home</Navbar.Brand>
       { props.user ?
         <>
-        <span class="navbar-text">
+        <span className="navbar-text">
           <h5>Welcome, {props.user.displayName}
             <img 
               src={props.user.photoURL} 

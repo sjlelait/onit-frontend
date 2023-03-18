@@ -7,46 +7,51 @@ const ShowImportant = (props) => {
   const [task, setTask] = useState([]);
 
   const getTask = async () => {
-    const token = await props.user.getIdToken();
-    const response = await fetch(url, {
-      headers: {
-        'Authorization': 'Bearer ' + token
-      }
-    });
-    const data = await response.json();
-    setTask(data);
+    try {
+      const token = await props.user.getIdToken();
+      const response = await fetch(url, {
+        headers: {
+          'Authorization': 'Bearer ' + token
+        }
+      });
+      const data = await response.json();
+      setTask(data);
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
-    console.log('User object in ShowImportant:', props.user);
     if (props.user) {
       getTask();
     }
   }, [props.user]);
   
   
-  // functions to handle delete & edit
+  // function to handle delete 
 const handleDelete = (itemId) => {
   setTask(task.filter((task) => task._id !== itemId));
 };
 
-    // not working quite yet
-const handleEdit = async (itemId, newData) => {
-  try {
-    const updatedTask = await Promise.all(
-      task.map(async (task) => {
-        if (task._id === itemId) {
-          return { ...task, ...newData };
-        } else {
-          return task;
-        }
-      })
-    );
-    setTask(updatedTask);
-  } catch (error) {
-    console.error(error);
-  }
-};
+    // handle edit
+    const handleEdit = async (itemId, newData) => {
+      try {
+        const token = await props.user.getIdToken();
+        const response = await fetch(`http://localhost:3001/tasks/${itemId}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+          },
+          body: JSON.stringify(newData)
+        });
+        const updatedTask = await response.json();
+        setTask(task.map((task) => (task._id === itemId ? updatedTask : task)));
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
 const loaded = () => {
   return (
@@ -55,7 +60,11 @@ const loaded = () => {
         {task.map(task => (
           <div key={task._id}>
             <Link to={`/tasks/${task._id}/subtasks`}>{task.title}</Link>
-            <Ellipses itemId={task._id} onDelete={handleDelete} onEdit={handleEdit} user={props.user} />
+            <Ellipses
+              itemId={task._id}
+              onDelete={() => handleDelete(task._id)}
+              onEdit={(newData) => handleEdit(task._id, newData)}
+            />
           </div>
         ))}
       </div>

@@ -1,18 +1,23 @@
-import React, { useState} from 'react';
-import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
 import { DropdownButton, Dropdown } from 'react-bootstrap';
 import { deleteItem } from '../helper';
 
-
-function Ellipses(props) {
-    const url = "http://localhost:3001";
-
-    const { itemId } = useParams();
+const Ellipses = (props) => {
+    
+    const { itemId } = props;
 
     const [isEditing, setIsEditing] = useState(false);
-    const [showForm, setShowForm] = useState(false);
-    const [newTaskData, setNewTaskData] = useState('');
+    const [showForm, setShowForm] = useState(true);
+    const [newTaskData, setNewTaskData] = useState({
+        title: '',
+        timeframe: ''
+    });
 
+    useEffect(() => {
+        setShowForm(true);
+    }, []);
+
+    // delete task
     const handleDelete = async () => {
         const success = await deleteItem(props.itemId, props.user);
         if (success) {
@@ -22,71 +27,77 @@ function Ellipses(props) {
         }
       };
 
-      // edit task
-
-      const handleEdit = (itemId) => {
-        setShowForm(true);
-        setIsEditing(!isEditing);
-        console.log(props.itemId)
-      }; 
+    // edit task
+    const handleEdit = (itemId) => {
+        setIsEditing(true);
+        setShowForm(false);
+        console.log(itemId);
+      };
         
       const handleInputChange = (event) => {
-        setNewTaskData(event.target.value);
-        console.log(event.target.value);
-      };
+        const { name, value } = event.target;
+        setNewTaskData(prevData => ({ ...prevData, [name]: value }));
+        console.log(newTaskData);
+    };
 
-        const handleEditTask = async (itemId, newData) => {
-            try {
-                const token = await props.user.getIdToken();
-                const response = await fetch(`${url}/tasks/${itemId}`, {
+    const handleEditTask = async (itemId, newData) => {
+        // error for props.user
+        try {
+            if (!props.user) {
+                throw new Error('User is not defined');
+            }
+            const token = await props.user.getIdToken();
+            const response = await fetch(`http://localhost:3001/tasks/${itemId}`, {
                 method: 'PUT',
                 headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': 'Bearer ' + token
-                },
-                body: JSON.stringify({ newData }),
-              });
-              const data = await response.json();
-              setIsEditing(false);
-              setShowForm(false);
-              console.log(itemId);
-            } catch (error) {
-              console.error(error);
-            }
-          };
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + token
+                  },
+                body: JSON.stringify(newData)
+            });
+            const updatedTaskItem = await response.json();
+            props.onEdit(itemId, updatedTaskItem);
+        } catch (error) {
+            console.error(error);
+            return false;
+        }
+        setIsEditing(false);
+        setShowForm(false);
+        console.log(itemId);
+    };
 
-          const handleSubmit = event => {
-            event.preventDefault(); 
-            handleEditTask(itemId, newTaskData);
-          };
+    const handleSubmit = async event => {
+        event.preventDefault(); 
+        await handleEditTask(itemId, newTaskData);
+      };
     
-          return (
-            <DropdownButton variant="outline-secondary" title="...">
-                <Dropdown.Item onClick={handleDelete}>Delete</Dropdown.Item>
-                {isEditing ? (
-                    <form onSubmit={handleSubmit}>
-                    <input
-                      type="text"
-                      value={newTaskData.title}
-                      name="title"
-                      placeholder="change title"
-                      onChange={handleInputChange}
-                    />
-                     <input
-                      type="text"
-                      value={newTaskData.timeframe}
-                      name="timeframe"
-                      placeholder="00:00"
-                      onChange={handleInputChange}
-                    />                 
-                    
-                    <input type="submit" value="Save" />
-                  </form>
-                 ) : (
-                    <Dropdown.Item onClick={handleEdit}>Edit</Dropdown.Item>
-                )}
-            </DropdownButton>
-        );
-    }
+    return (
+        <DropdownButton variant="outline-secondary" title="...">
+        <Dropdown.Item onClick={handleEdit}>Edit</Dropdown.Item>
+        
+        {isEditing ? (
+            <form onSubmit={handleSubmit}>
+                <input
+                    type="text"
+                    value={newTaskData.title}
+                    name="title"
+                    placeholder="change title"
+                    onChange={handleInputChange}
+                />
+                <input
+                    type="text"
+                    value={newTaskData.timeframe}
+                    name="timeframe"
+                    placeholder="00:00"
+                    onChange={handleInputChange}
+                />                 
+                <button type="submit">Save</button>
+            </form>
+        ) : (
+            <Dropdown.Item onClick={handleDelete}>Delete</Dropdown.Item>
+        )}
+    </DropdownButton>
+    );
+}
     
-    export default Ellipses;
+export default Ellipses;
