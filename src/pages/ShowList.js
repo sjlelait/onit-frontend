@@ -1,10 +1,15 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
+import ProgressBar from 'react-bootstrap/ProgressBar';
 
 const ShowList = (props) => {
 
+  const [completedPercentage, setCompletedPercentage] = useState(0);
 
+  function AnimatedExample() {
+    return <ProgressBar animated now={completedPercentage} />;
+  }
 
   const { category } = useParams();
 
@@ -33,6 +38,10 @@ const ShowList = (props) => {
       const data = await response.json();
       console.log(data);
       setList(data);
+      //for the progressb bar 
+      const completedTasks = data.filter(task => task.complete);
+      const percentage = Math.round((completedTasks.length / data.length) * 100);
+      setCompletedPercentage(percentage);
     } catch (error) {
       console.log(error);
     }
@@ -172,6 +181,7 @@ const handleClickComplete = async (task) => {
   return (
     <section className="task-section">
         {list ? loaded() : loading()}
+        <AnimatedExample />
       <form onSubmit={handleSubmit}>
         <input
           type="text"
