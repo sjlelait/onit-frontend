@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
+import Table from 'react-bootstrap/Table'
 
 const ShowList = (props) => {
 
@@ -81,7 +82,7 @@ const ShowList = (props) => {
 
   const handleClick = async (task) => {
   const updatedTask = { ...task, important: !task.important };
-
+    console.log(updatedTask)
   try {
     const token = await props.user.getIdToken();
     await fetch(`http://localhost:3001/tasks/${task._id}`, {
@@ -106,6 +107,7 @@ const ShowList = (props) => {
 
 
 const handleClickComplete = async (task) => {
+  console.log(task)
   const updatedTask = { ...task, complete: !task.complete };
 
   try {
@@ -120,6 +122,7 @@ const handleClickComplete = async (task) => {
     });
     setList((list) => {
       const listsCopy = [...list];
+      console.log(listsCopy)
       const foundListIndex = listsCopy.findIndex((l) => l._id === task._id);
       const listCopy = listsCopy[foundListIndex];
       listsCopy.splice(foundListIndex, 1, updatedTask);
@@ -136,35 +139,38 @@ const handleClickComplete = async (task) => {
   const loaded = () => {
     return (
         <div>
-          <table>
-            <tr>
-      <th>{category} List</th>
-      </tr>
-      {/* <ul> */}
-        {list.map((item, index) => (
-            <section>
-
-
-        <tr>
-       
-        
-        <td><input type="checkbox" onClick={() => handleClickComplete(item)}/></td>
-        <td><button onClick={() => handleClick(item)}>
-          {item.important ? "★" : "☆"}
-        </button>
-        </td>
-        
-          <td>
-            <Link to={`/tasks/${item._id}/subtasks`}>
-          <p key={item.id}>{item.title} {item.timeframe} {item.important ? 'important' : 'unimportant'} {item.complete ? "done" : "need to do" }{index} </p>
-          </Link>
-        
-          </td>
-          </tr>
-          </section>
-        ))}
-      {/* </ul> */}
-      </table>
+          <h1>{category}</h1>
+          <Table size="sm" >
+            <thead>
+              <tr>
+               <th></th>
+               <th></th>
+               <th>Completed</th>
+               <th>Important</th>
+               <th>Time</th>
+              </tr>
+            </thead>
+                {list.map((item, index) => (
+            <tbody>
+              <tr>
+               <td>{index + 1}</td>
+               <td className="flex-container">
+                 <Link to={`/tasks/${item._id}/subtasks`}>
+                 <span className="item-title">{item.title}</span>
+                 </Link>
+                </td>
+                <td><input type="checkbox" onClick={() => handleClickComplete(item)}/></td>
+               <td><button onClick={() => handleClick(item)}>
+                 {item.important ? "★" : "☆"}
+                   </button>
+               </td>
+                <td>
+                 <span className="item-timeframe">{item.timeframe}</span>
+                 </td>
+              </tr>
+            </tbody>
+            ))}
+          </Table>
     </div>
     );
   };
@@ -196,7 +202,7 @@ const handleClickComplete = async (task) => {
         />
        
         
-        <input type="submit" value="Create Task" />
+        <input type="submit" value="Add Task" />
       </form>
     
     </section>
