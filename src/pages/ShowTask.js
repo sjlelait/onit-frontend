@@ -13,8 +13,6 @@ const ShowTask = (props) => {
     value: '',
   })
 
-
-
   const getTask = async () => {
     try {
       const token = await props.user.getIdToken();
@@ -93,19 +91,19 @@ const handleClickComplete = (subtask) => {
       <div>
         
         <h1>{task.title}</h1>
+        <h3>Subtasks</h3>
         <p>{task.description}</p>
         {task.subtask && task.subtask.length > 0 ? 
         (
           task.subtask.map((subtask, index) => (
             <div>
             <div>
-              <input type="checkbox" onClick={() => handleClickComplete(subtask)}/> 
-            <p key={subtask.id} className={`${subtask.complete ? 'crossed-line' : ''}`}>
+            <div key={subtask.id} className={`${subtask.complete ? 'crossed-line' : ''}`}>
+              <input type="checkbox" onClick={() => handleClickComplete(subtask)} className="subtask-checkbox"/> 
               {subtask.name} - {subtask.complete ? 'Complete' : 'Incomplete'}
-            </p>
-            
+              
             </div>
-            
+            </div>
             </div>
           ))
         

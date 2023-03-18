@@ -140,7 +140,7 @@ const handleClickComplete = async (task) => {
     return (
         <div>
           <h1>{category}</h1>
-          <Table size="sm" >
+          <Table >
             <thead>
               <tr>
                <th></th>
