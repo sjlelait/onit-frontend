@@ -181,7 +181,7 @@ const handleDelete = (itemId) => {
               <tr>
                <td>{index + 1}</td>
                <td className="flex-container">
-                 <Link to={`/tasks/${item._id}/subtasks`}>
+                 <Link className="link" to={`/tasks/${item._id}/subtasks`}>
                  <span className="item-title">{item.title}</span>
                  </Link>
                 </td>

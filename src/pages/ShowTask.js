@@ -108,7 +108,7 @@ const handleClickComplete = async (subtask) => {
             <div>
             <div>
             <div key={subtask.id} className={`${subtask.complete ? 'crossed-line' : ''}`}>
-              <input type="checkbox" onClick={() => handleClickComplete(subtask)} className="subtask-checkbox"/> 
+              <input type="checkbox" onClick={() => handleClickComplete(subtask)} className="sub-checkbox"/> 
               {subtask.name} - {subtask.complete ? 'Complete' : 'Incomplete'}
               
             </div>

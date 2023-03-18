@@ -50,13 +50,13 @@ const handleEdit = async (itemId, newData) => {
 
 const loaded = () => {
   return (
-    <div>
+    <div className="container">
       <h1>Important Tasks</h1>
         {task.map(task => (
-          <p key={task._id}>
-            <Link to={`/tasks/${task._id}/subtasks`}>{task.title}</Link>
-            <Ellipses itemId={task._id} onDelete={handleDelete} onEdit={handleEdit} user={props.user} />
-          </p>
+          <ul className="important" key={task._id}>
+            <p className="star">★ </p>
+            <Link className="link" to={`/tasks/${task._id}/subtasks`}>{task.title}</Link>
+          </ul>
         ))}
       </div>
     );
