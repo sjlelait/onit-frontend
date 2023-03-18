@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
 
 function Index(props) {
   const [tasks, setTasks] = useState([]);
@@ -100,15 +101,34 @@ function Index(props) {
   
 
   const loaded = () => {
+   
     const categories = tasks.map((task) => task.category);
     const uniqueCategories = [...new Set(categories)];
-    return uniqueCategories.map((category) => (
-      <div key={category} className='task'>
+    return ( 
+      <>
+      <ul class="index-list button-container">
+        {uniqueCategories.map((category) => (
+      <li key={category} className='task'>
         <Link to={`/tasks/${category}`}>
-          <p>{category}</p>
+        <Button className="index-buttons" variant="primary">{category}</Button>
         </Link>
-      </div>
-    ));
+      </li>
+        ))}
+      </ul>
+       <div>
+       <form className="index-form" onSubmit={handleSubmit}>
+         <label aria-label="Add New Category" htmlFor='category'></label>
+         <input
+           type='text'
+           name='category'
+           value={category}
+           onChange={handleChange}
+         />
+         <input id="category" type='submit' value='+' />
+       </form>
+     </div>
+     </>
+     );
   };
 
   const loading = () => {
@@ -125,25 +145,7 @@ function Index(props) {
     
    
    
-      <div>
-        <form onSubmit={handleSubmit}>
-          <label htmlFor='category'>Category &nbsp;</label>
-          <input
-            type='text'
-            name='category'
-            value={category}
-            onChange={handleChange}
-          />
-          {/* <label htmlFor='title'>Title:</label>
-          <input
-            type='text'
-            name='title'
-            value={title}
-            onChange={handleChange}
-          /> */}
-          <input type='submit' value='Create Category' />
-        </form>
-      </div>
+     
 
       <div>{quoteapi()}</div>
 
