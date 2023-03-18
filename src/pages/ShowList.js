@@ -8,7 +8,7 @@ const ShowList = (props) => {
   const [completedPercentage, setCompletedPercentage] = useState(0);
 
   function AnimatedExample() {
-    return <ProgressBar animated now={completedPercentage} />;
+    return <ProgressBar animated now={completedPercentage} label={`${completedPercentage}%`} />;
   }
 
   const { category } = useParams();
@@ -197,9 +197,8 @@ const handleClickComplete = async (task) => {
           placeholder="00:00"
           onChange={handleChange}
         />
-       
         
-        <input type="submit" value="Create Task" />
+       <button type="submit">Create Task</button>
       </form>
     
     </section>

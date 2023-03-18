@@ -1,13 +1,32 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: Montserrat;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: Montserrat;
+}
+
+form > input {
+  background-color: var(--forum-seamoss);
+  border: 0;
+  padding: 10;
+  margin: 2px;
+  height: 35px;
+  width: auto;
+  
+}
+
+form > input > ::placeholder {
+ color: var(--btn-fontcolor);
+}
+
+form > button {
+  background-color: var(--btn-yellow);
+  border: 0;
+  margin: 2px;
+  height: 35px;
+  width: auto;
 }
