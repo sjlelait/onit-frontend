@@ -7,8 +7,6 @@ import ShowTask from '../pages/ShowTask';
 import ShowImportant from '../pages/ShowImportant';
 
 function Main(props) {
-  // FB - Important! Example of using JWT to confirm a user is authorized
-  //FB - This is a hypothetical request that has the neceesary token authorization components that are demonstrated at the end of the part 2 video.
 
   const [tasks, setTasks] = useState(null);
   const API_URL = 'http://localhost:3001/home';
@@ -42,7 +40,7 @@ function Main(props) {
 
   // This ends here
   return (
-    <main>
+    <main class="background">
       <Routes>
         <Route path='/' element={<Index user={props.user} tasks={tasks} />} />
         <Route path='/tasks/:category' element={<ShowList user={props.user} tasks={tasks} />} />
