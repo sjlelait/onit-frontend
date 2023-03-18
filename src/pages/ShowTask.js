@@ -109,6 +109,7 @@ const ShowTask = (props) => {
         {task.subtask && task.subtask.length > 0 ? (
           task.subtask.map((subtask, index) => (
             <div>
+
               <div>
                 <div
                   key={subtask.id}
@@ -118,7 +119,7 @@ const ShowTask = (props) => {
                     type='checkbox'
                     checked={subtask.complete}
                     onChange={() => handleClickComplete(subtask)} 
-                    className='subtask-checkbox'
+                    className='sub-checkbox'
                   />
                   {subtask.name} -{' '}
                   {subtask.complete ? 'Complete' : 'Incomplete'}
