@@ -6,7 +6,7 @@ function Index(props) {
   const [tasks, setTasks] = useState([]);
   const [category, setCategory] = useState('');
   const [title, setTitle] = useState('');
-
+  const [categoryPlaceholder, setCategoryPlaceholder] = useState('+ New Category');
 
   const api_url = "https://type.fit/api/quotes";
 
@@ -72,7 +72,13 @@ function Index(props) {
     }
   };
   
-  
+  const handleCategoryFocus = () => {
+    setCategoryPlaceholder('Type to create a new category!');
+  };
+
+  const handleCategoryBlur = () => {
+    setCategoryPlaceholder('+ Add a category');
+  };
 
   const API_URL = 'https://onit-app.herokuapp.com/home';
 
@@ -117,15 +123,18 @@ function Index(props) {
       </ul>
        <div>
        <form className="index-form" onSubmit={handleSubmit}>
-         <label aria-label="Add New Category" htmlFor='category'></label>
-         <input
-           type='text'
-           name='category'
-           value={category}
-           onChange={handleChange}
-         />
-         <input class="index-form-button" id="category" type='submit' value='+' />
-       </form>
+            <label aria-label="Add New Category" htmlFor="category"></label>
+            <input
+              type="text"
+              name="category"
+              value={category}
+              placeholder={categoryPlaceholder}
+              onChange={handleChange}
+              onFocus={handleCategoryFocus}
+              onBlur={handleCategoryBlur}
+            />
+            <input class="index-form-button" id="category" type="submit" value="+" />
+          </form>
      </div>
      </>
      );
@@ -142,10 +151,6 @@ function Index(props) {
       <h1>Please Login</h1>
       :
       <section>
-    
-   
-   
-     
 
       <div>{quoteapi()}</div>
 
