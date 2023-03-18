@@ -21,20 +21,23 @@ form > button {
 form > button, form > input {
   border: 0;
   margin: 2px;
-  height: 35px;
+  height: auto;
   width: auto;
 }
 
 .progressBar {
-  width: 40%;
+  width: 70%;
 }
 
-ul {
+.table {
   background-color: var(--space-grey);
-  width: 40%;
   color: var(--btn-fontcolor);
 }
 
-div {
-  color: var(--forum-seamoss);
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
 }

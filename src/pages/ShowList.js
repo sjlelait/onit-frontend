@@ -161,7 +161,7 @@ const handleDelete = (itemId) => {
   //Loaded function for when data is fetched
   const loaded = () => {
     return (
-        <div>
+        <div className="container">
           <h1>{category}</h1>
           <Table >
             <thead>
@@ -207,7 +207,7 @@ const handleDelete = (itemId) => {
  
   return (
     
-    <section className="task-section">
+    <div className="container">
         {list ? loaded() : loading()}
         <AnimatedExample />
         <p>{message}</p>
@@ -231,7 +231,7 @@ const handleDelete = (itemId) => {
        <button type="submit">Create Task</button>
       </form>
     
-    </section>
+    </div>
   );
 
 
