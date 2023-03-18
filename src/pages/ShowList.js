@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
+import Table from 'react-bootstrap/Table'
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import '../index.css';
 
@@ -100,7 +101,7 @@ const ShowList = (props) => {
 
   const handleClick = async (task) => {
   const updatedTask = { ...task, important: !task.important };
-
+    console.log(updatedTask)
   try {
     const token = await props.user.getIdToken();
     await fetch(`http://localhost:3001/tasks/${task._id}`, {
@@ -125,6 +126,7 @@ const ShowList = (props) => {
 
 
 const handleClickComplete = async (task) => {
+  console.log(task)
   const updatedTask = { ...task, complete: !task.complete };
 
   try {
@@ -139,6 +141,7 @@ const handleClickComplete = async (task) => {
     });
     setList((list) => {
       const listsCopy = [...list];
+      console.log(listsCopy)
       const foundListIndex = listsCopy.findIndex((l) => l._id === task._id);
       const listCopy = listsCopy[foundListIndex];
       listsCopy.splice(foundListIndex, 1, updatedTask);
@@ -154,41 +157,49 @@ const handleClickComplete = async (task) => {
   //Loaded function for when data is fetched
   const loaded = () => {
     return (
-        <div className="body">
-      <h1>{category} List</h1>
-      <ul>
-        {list.map((item, index) => (
-            <section>
-
-
-        important: {`${item.important}`}
-        <button onClick={() => handleClick(item)}>
-          {item.important ? "true" : "false"}
-        </button>
-        complete: {`${item.complete}`}
-        <button onClick={() => handleClickComplete(item)}>
-          {item.complete ? "true" : "false"}
-        </button>
-
-            <Link to={`/tasks/${item._id}/subtasks`}>
-          <li key={item.id}>{item.title} {item.timeframe} {item.important ? 'important' : 'unimportant'} {item.complete ? "done" : "need to do" }{index} </li>
-          </Link>
-         
-          </section>
-        ))}
-      </ul>
-      
+        <div>
+          <h1>{category}</h1>
+          <Table >
+            <thead>
+              <tr>
+               <th></th>
+               <th></th>
+               <th>Completed</th>
+               <th>Important</th>
+               <th>Time</th>
+              </tr>
+            </thead>
+                {list.map((item, index) => (
+            <tbody>
+              <tr>
+               <td>{index + 1}</td>
+               <td className="flex-container">
+                 <Link to={`/tasks/${item._id}/subtasks`}>
+                 <span className="item-title">{item.title}</span>
+                 </Link>
+                </td>
+                <td><input type="checkbox" onClick={() => handleClickComplete(item)}/></td>
+               <td><button onClick={() => handleClick(item)}>
+                 {item.important ? "★" : "☆"}
+                   </button>
+               </td>
+                <td>
+                 <span className="item-timeframe">{item.timeframe}</span>
+                 </td>
+              </tr>
+            </tbody>
+            ))}
+          </Table>
     </div>
     );
   };
-
-
 
   const loading = () => {
     return <h1 className="h1">Loading...</h1>;
   };
  
   return (
+    
     <section className="task-section">
         {list ? loaded() : loading()}
         <AnimatedExample />
@@ -208,6 +219,7 @@ const handleClickComplete = async (task) => {
           placeholder="00:00"
           onChange={handleChange}
         />
+
 
        <button type="submit">Create Task</button>
       </form>

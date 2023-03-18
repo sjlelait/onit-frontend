@@ -8,6 +8,10 @@ const ShowTask = (props) => {
   const [newSubtask, setNewSubtask] = useState({
     name: '',
   });
+  const [isCrossed, setCrossed] = useState({
+    key: '',
+    value: '',
+  })
 
   const getTask = async () => {
     try {
@@ -25,7 +29,6 @@ const ShowTask = (props) => {
     }
   };
   
-  
 
   const createSubtask = async (subtask) => {
     try {
@@ -38,12 +41,17 @@ const ShowTask = (props) => {
         },
         body: JSON.stringify(subtask),
       });
-      getTask();
+      setTask((prevState) => ({
+        ...prevState,
+        subtask: [...prevState.subtask, subtask]
+      }));
+      setNewSubtask({
+        name: '',
+      });
     } catch (error) {
       console.error(error);
     }
   };
-  
 
   const handleChange = (event) => {
     setNewSubtask((prevState) => ({
@@ -64,18 +72,43 @@ const ShowTask = (props) => {
     getTask();
   }, []);
 
+const handleClickComplete = (subtask) => {
+  const subtasksCopy = [...task.subtask];
+  const foundSubtaskIndex = subtasksCopy.findIndex((t) => t._id === subtask._id);
+  subtasksCopy[foundSubtaskIndex] = {
+    ...subtasksCopy[foundSubtaskIndex],
+    complete: !subtasksCopy[foundSubtaskIndex].complete
+  };
+  setTask((prevState) => ({
+    ...prevState,
+    subtask: subtasksCopy
+  }));
+};
+
   const loaded = () => {
+
     return (
       <div>
+        
         <h1>{task.title}</h1>
-        <ul>{task.description}</ul>
-        {task.subtask && task.subtask.length > 0 ? (
-          task.subtask.map((subtask) => (
-            <ul key={subtask.id}>
+        <h3>Subtasks</h3>
+        <p>{task.description}</p>
+        {task.subtask && task.subtask.length > 0 ? 
+        (
+          task.subtask.map((subtask, index) => (
+            <div>
+            <div>
+            <div key={subtask.id} className={`${subtask.complete ? 'crossed-line' : ''}`}>
+              <input type="checkbox" onClick={() => handleClickComplete(subtask)} className="subtask-checkbox"/> 
               {subtask.name} - {subtask.complete ? 'Complete' : 'Incomplete'}
-            </ul>
+              
+            </div>
+            </div>
+            </div>
+
           ))
-        ) : (
+        
+          ) : (
           <p>No subtasks found.</p>
         )}
         <form onSubmit={handleSubmit}>

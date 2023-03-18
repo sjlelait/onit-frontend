@@ -63,6 +63,11 @@ body{
   }
 }
 
+.crossed-line {
+  text-decoration: line-through;
+  color: red
+}
+
 .navbar {
   background-color: var(--bg-green);
   color: var(--forum-seamoss) !important;
@@ -311,3 +316,4 @@ font-size: 30px !important;
     }
 
 }
+
