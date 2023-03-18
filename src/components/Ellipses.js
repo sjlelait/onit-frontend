@@ -4,14 +4,16 @@ import { deleteItem, editItem } from '../helper';
 
 function Ellipses(props) {
 
-        const handleDelete = async () => {
-            const success = await deleteItem(props.itemId);
-            if (success) {
-                props.onDelete(props.itemId);
-            } else {
-                console.error('Failed to delete item');
-            }
+    const handleDelete = async () => {
+        const success = await deleteItem(props.itemId, props.user);
+        if (success) {
+          props.onDelete(props.itemId);
+        } else {
+          console.error('Failed to delete item');
         }
+      };
+      
+      
         
     
         const handleEdit = async () => {
