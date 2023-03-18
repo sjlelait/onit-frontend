@@ -38,7 +38,7 @@ const ShowList = (props) => {
       const data = await response.json();
       console.log(data);
       setList(data);
-      //for the progressb bar 
+      //for the progress bar 
       const completedTasks = data.filter(task => task.complete);
       const percentage = Math.round((completedTasks.length / data.length) * 100);
       setCompletedPercentage(percentage);
