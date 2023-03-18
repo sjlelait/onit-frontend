@@ -9,7 +9,7 @@ import ShowImportant from '../pages/ShowImportant';
 function Main(props) {
 
   const [tasks, setTasks] = useState(null);
-  const API_URL = 'http://localhost:3001/home';
+  const API_URL = 'https://onit-app.herokuapp.com/home';
 
   const getTask = async () => {
     let token;

@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 const ShowTask = (props) => {
   const { taskId } = useParams();
 
-  const url = `http://localhost:3001/tasks/${taskId}/subtasks`;
+  const url = `https://onit-app.herokuapp.com/tasks/${taskId}/subtasks`;
   const [task, setTask] = useState(null);
   const [newSubtask, setNewSubtask] = useState({
     name: '',
@@ -79,7 +79,7 @@ const handleClickComplete = async (subtask) => {
   subtasksCopy[foundSubtaskIndex] = { ...subtasksCopy[foundSubtaskIndex], complete: !subtasksCopy[foundSubtaskIndex].complete };  
   try {
     const token = await props.user.getIdToken();
-    await fetch(`http://localhost:3001/tasks/${taskId}/subtasks/${subtask._id}`, {
+    await fetch(`https://onit-app.herokuapp.com/tasks/${taskId}/subtasks/${subtask._id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

@@ -1,4 +1,4 @@
-const url = 'http://localhost:3001';
+const url = 'https://onit-app.herokuapp.com/';
 
 export const deleteItem = async (itemId, user) => {
   console.log('Deleting item with id:', itemId);
