@@ -185,7 +185,7 @@ const handleDelete = (itemId) => {
                  <span className="item-title">{item.title}</span>
                  </Link>
                 </td>
-                <td><input className="checkbox" type="checkbox" onClick={() => handleClickComplete(item)}/></td>
+                <td><input className="checkbox" type="checkbox" checked={item.complete} onClick={() => handleClickComplete(item)}/></td>
                <td><button onClick={() => handleClick(item)}>
                  {item.important ? "★" : "☆"}
                    </button>
