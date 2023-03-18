@@ -164,9 +164,18 @@ main {
   font-size: 30px !important;
 }
 
-ul {
+ul.button-container {
   list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto; /* Add this to center the container */
+  padding: 0;
+  overflow: word-wrap;
+  background-color: var(--bg-green);
+  width: 60%; /* Set the width to 50% */
 }
+
 
 .index-buttons{
 background-color: var(--btn-yellow) !important;
@@ -185,8 +194,13 @@ font-size: 30px !important;
 }
 
 .index-form input{
-  width: 90%;
+  width: 80%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px 0 0 5px;
 }
+
+
 
 /* Responsive Header */
 /* Default styles for mobile devices */
