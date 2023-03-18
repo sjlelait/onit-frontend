@@ -21,12 +21,12 @@ form > button {
 form > button, form > input {
   border: 0;
   margin: 2px;
-  height: 35px;
+  height: auto;
   width: auto;
 }
 
 .progressBar {
-  width: 40%;
+  width: 50%;
 }
 
 ul {

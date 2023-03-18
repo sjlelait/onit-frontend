@@ -16,11 +16,13 @@ const ShowList = (props) => {
     </div>;
   };
 
-  // if (completedPercentage < 100) {
-  //   setMessage(`You are ${completedPercentage}% done with this list. Keep going!`);
-  // } else if (completedPercentage === 100) {
-  //   setMessage("Congratulations, you're all done!");
-  // };
+  useEffect(() => {
+    if (completedPercentage < 100) {
+      setMessage(`You are ${completedPercentage}% done with this list. Keep going!`);
+    } else if (completedPercentage === 100) {
+      setMessage("Congratulations, you're all done!");
+    }
+  }, [completedPercentage]);
 
   const { category } = useParams();
 
@@ -169,14 +171,14 @@ const handleClickComplete = async (task) => {
                <th>Time</th>
               </tr>
             </thead>
-                {list.map((item, index) => (
+        {list.map((item, index) => (
             <tbody>
               <tr>
                <td>{index + 1}</td>
                <td className="flex-container">
-                 <Link to={`/tasks/${item._id}/subtasks`}>
+            <Link to={`/tasks/${item._id}/subtasks`}>
                  <span className="item-title">{item.title}</span>
-                 </Link>
+          </Link>
                 </td>
                 <td><input type="checkbox" onClick={() => handleClickComplete(item)}/></td>
                <td><button onClick={() => handleClick(item)}>
@@ -188,7 +190,7 @@ const handleClickComplete = async (task) => {
                  </td>
               </tr>
             </tbody>
-            ))}
+        ))}
           </Table>
     </div>
     );
