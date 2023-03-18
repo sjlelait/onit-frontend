@@ -27,7 +27,7 @@ const ShowList = (props) => {
 
   const { category } = useParams();
 
-  const url = ` http://localhost:3001/tasks/${category}`;
+  const url = ` https://onit-app.herokuapp.com/tasks/${category}`;
 
 
   // State to hold the list data
@@ -107,7 +107,7 @@ const ShowList = (props) => {
     console.log(updatedTask)
   try {
     const token = await props.user.getIdToken();
-    await fetch(`http://localhost:3001/tasks/${task._id}`, {
+    await fetch(`https://onit-app.herokuapp.com/tasks/${task._id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -134,7 +134,7 @@ const handleClickComplete = async (task) => {
 
   try {
     const token = await props.user.getIdToken();
-    await fetch(`http://localhost:3001/tasks/${task._id}`, {
+    await fetch(`https://onit-app.herokuapp.com/tasks/${task._id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -185,7 +185,7 @@ const handleDelete = (itemId) => {
                  <span className="item-title">{item.title}</span>
                  </Link>
                 </td>
-                <td><input className="checkbox" type="checkbox" onClick={() => handleClickComplete(item)}/></td>
+                <td><input className="checkbox" type="checkbox" checked={item.complete} onClick={() => handleClickComplete(item)}/></td>
                <td><button onClick={() => handleClick(item)}>
                  {item.important ? "★" : "☆"}
                    </button>

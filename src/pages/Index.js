@@ -6,7 +6,7 @@ function Index(props) {
   const [tasks, setTasks] = useState([]);
   const [category, setCategory] = useState('');
   const [title, setTitle] = useState('');
-
+  const [categoryPlaceholder, setCategoryPlaceholder] = useState('+ New Category');
 
   const api_url = "https://type.fit/api/quotes";
 
@@ -54,7 +54,7 @@ function Index(props) {
     console.log('Submitting form with category:', category, 'and title:', title);
     try {
       const token = await props.user.getIdToken();
-      const response = await fetch('http://localhost:3001/tasks', {
+      const response = await fetch('https://onit-app.herokuapp.com/tasks', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -72,9 +72,15 @@ function Index(props) {
     }
   };
   
-  
+  const handleCategoryFocus = () => {
+    setCategoryPlaceholder('Type to create a new category!');
+  };
 
-  const API_URL = 'http://localhost:3001/home';
+  const handleCategoryBlur = () => {
+    setCategoryPlaceholder('+ Add a category');
+  };
+
+  const API_URL = 'https://onit-app.herokuapp.com/home';
 
   const getTasks = async () => {
     try {
@@ -117,15 +123,18 @@ function Index(props) {
       </ul>
        <div>
        <form className="index-form" onSubmit={handleSubmit}>
-         <label aria-label="Add New Category" htmlFor='category'></label>
-         <input
-           type='text'
-           name='category'
-           value={category}
-           onChange={handleChange}
-         />
-         <input class="index-form-button" id="category" type='submit' value='+' />
-       </form>
+            <label aria-label="Add New Category" htmlFor="category"></label>
+            <input
+              type="text"
+              name="category"
+              value={category}
+              placeholder={categoryPlaceholder}
+              onChange={handleChange}
+              onFocus={handleCategoryFocus}
+              onBlur={handleCategoryBlur}
+            />
+            <input class="index-form-button" id="category" type="submit" value="+" />
+          </form>
      </div>
      </>
      );
@@ -142,10 +151,6 @@ function Index(props) {
       <h1>Please Login</h1>
       :
       <section>
-    
-   
-   
-     
 
       <div>{quoteapi()}</div>
 

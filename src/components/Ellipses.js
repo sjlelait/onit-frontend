@@ -47,7 +47,7 @@ const Ellipses = (props) => {
                 throw new Error('User is not defined');
             }
             const token = await props.user.getIdToken();
-            const response = await fetch(`http://localhost:3001/tasks/${itemId}`, {
+            const response = await fetch(`https://onit-app.herokuapp.com/${itemId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
