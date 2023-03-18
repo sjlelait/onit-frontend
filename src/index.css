@@ -27,9 +27,10 @@ form > button, form > input {
 
 .progressBar {
   width: 50%;
+  position: relative;
 }
 
-ul {
+table {
   background-color: var(--space-grey);
   width: 40%;
   color: var(--btn-fontcolor);
