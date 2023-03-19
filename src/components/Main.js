@@ -44,8 +44,8 @@ function Main(props) {
           path='/tasks/:category'
           element={
             <>
+            <BackButton />
               <ShowList user={props.user} tasks={tasks} />
-              <BackButton />
             </>
           }
         />
@@ -53,8 +53,8 @@ function Main(props) {
           path='/tasks/:taskId/subtasks'
           element={
             <>
+             <BackButton />
               <ShowTask user={props.user} />
-              <BackButton />
             </>
           }
         />
@@ -62,8 +62,8 @@ function Main(props) {
           path='/tasks/important'
           element={
             <>
-              <ShowImportant user={props.user} />
               <BackButton />
+              <ShowImportant user={props.user} />
             </>
           }
         />
