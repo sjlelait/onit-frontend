@@ -158,6 +158,7 @@ const ShowList = (props) => {
   // function to handle delete
   const handleDelete = (itemId) => {
     setList(list.filter((list) => list._id !== itemId));
+
     // update progress bar
     const updatedList = list.filter((list) => list._id !== itemId);
     const completedTasks = updatedList.filter((task) => task.complete);
@@ -224,7 +225,7 @@ const handleEdit = (itemId, newData) => {
                  <span className="item-timeframe">{item.timeframe}</span>
                  </td>
                  <td>
-                  <Ellipses itemId={item._id} onDelete={handleDelete} onEdit={handleEdit} user={props.user} />
+                  <Ellipses itemId={item._id} onDelete={handleDelete} onEdit={handleEdit} user={props.user} page={'tasks'}/>
                 </td>
               </tr>
             </tbody>
