@@ -37,7 +37,7 @@ function Main(props) {
 
   // This ends here
   return (
-    <main class='background'>
+    <main className='background'>
       <Routes>
         <Route path='/' element={<Index user={props.user} tasks={tasks} />} />
         <Route
