@@ -1,13 +1,12 @@
-
 import { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Index from '../pages/Index';
 import ShowList from '../pages/ShowList';
 import ShowTask from '../pages/ShowTask';
 import ShowImportant from '../pages/ShowImportant';
+import BackButton from './BackButton';
 
 function Main(props) {
-
   const [tasks, setTasks] = useState(null);
   const API_URL = 'https://onit-app.herokuapp.com/home';
 
@@ -28,11 +27,9 @@ function Main(props) {
     }
   };
 
- 
-
   useEffect(() => {
-    if(props.user) {
-    getTask();
+    if (props.user) {
+      getTask();
     } else {
       setTasks(null);
     }
@@ -40,12 +37,36 @@ function Main(props) {
 
   // This ends here
   return (
-    <main class="background">
+    <main className='background'>
       <Routes>
         <Route path='/' element={<Index user={props.user} tasks={tasks} />} />
-        <Route path='/tasks/:category' element={<ShowList user={props.user} tasks={tasks} />} />
-        <Route path='/tasks/:taskId/subtasks' element={<ShowTask user={props.user} />} />
-        <Route path='/tasks/important' element={<ShowImportant user={props.user} /> } />
+        <Route
+          path='/tasks/:category'
+          element={
+            <>
+              <ShowList user={props.user} tasks={tasks} />
+              <BackButton />
+            </>
+          }
+        />
+        <Route
+          path='/tasks/:taskId/subtasks'
+          element={
+            <>
+              <ShowTask user={props.user} />
+              <BackButton />
+            </>
+          }
+        />
+        <Route
+          path='/tasks/important'
+          element={
+            <>
+              <ShowImportant user={props.user} />
+              <BackButton />
+            </>
+          }
+        />
       </Routes>
     </main>
   );
