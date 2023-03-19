@@ -82,7 +82,7 @@ const ShowList = (props) => {
 
   useEffect(() => {
     getList();
-  }, []);
+  }, [props.user]);
 
   const handleChange = (event) => {
     setNewForm((prevState) => ({
