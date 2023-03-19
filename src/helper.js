@@ -36,7 +36,7 @@ export const deleteSubtask = async (itemId, subtaskId, user) => {
         Authorization: 'Bearer ' + token,
       },
     });
-    
+
     if (response.ok) {
       return true;
     } else {

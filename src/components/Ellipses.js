@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { DropdownButton, Dropdown } from 'react-bootstrap';
 import { deleteItem, editItem, deleteSubtask } from '../helper';
 
@@ -12,6 +12,7 @@ const Ellipses = (props) => {
         timeframe: ''
     });
     const [isEditing, setIsEditing] = useState(false);
+    const [showDropdown, setShowDropdown] = useState(false);
 
     // delete task
     const handleDelete = async () => {
@@ -37,10 +38,6 @@ const Ellipses = (props) => {
       };
       
     // edit task
-    const handleEdit = (itemId) => {
-        setIsEditing(!isEditing);
-        console.log(itemId);
-      };
         
       const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -76,22 +73,25 @@ const Ellipses = (props) => {
         event.preventDefault(); 
         await handleEditTask(itemId, newTaskData);
         setIsEditing(false);
+        setShowDropdown(false);
       };
+
+      function handleDropdownToggle() {
+        setShowDropdown(!showDropdown);
+      }
     
       return (
-        <DropdownButton variant="outline-secondary" title="...">
+        <DropdownButton variant="outline-secondary" title="..." show={showDropdown} onClick={handleDropdownToggle}>
         {page === 'tasks' && (
         <>
-            <Dropdown.Item onClick={handleDelete}>Delete</Dropdown.Item>
-            <Dropdown.Item onClick={handleEdit}>Edit</Dropdown.Item>
+            <p>Edit Here</p>            
         </>
         )}
         {page === 'subtasks' && (
         <>
             <Dropdown.Item onClick={handleDeleteSubtask}>Delete</Dropdown.Item>
          </>
-        )}
-        {isEditing && (
+        )}        
             <form onSubmit={handleSubmit}>
                 <input
                     type="text"
@@ -109,7 +109,7 @@ const Ellipses = (props) => {
                 />
             <button type="submit">Save</button>
         </form>
-        )}
+        <Dropdown.Item onClick={handleDelete}>Delete</Dropdown.Item>
     </DropdownButton>
     );          
 }

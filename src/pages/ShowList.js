@@ -221,9 +221,6 @@ const handleEdit = (itemId, newData) => {
                 <td>
                   <span className='item-timeframe'>{item.timeframe}</span>
                 </td>
-                <td>
-                 <span className="item-timeframe">{item.timeframe}</span>
-                 </td>
                  <td>
                   <Ellipses itemId={item._id} onDelete={handleDelete} onEdit={handleEdit} user={props.user} page={'tasks'}/>
                 </td>
