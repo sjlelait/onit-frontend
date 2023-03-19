@@ -5,6 +5,8 @@ import Index from '../pages/Index';
 import ShowList from '../pages/ShowList';
 import ShowTask from '../pages/ShowTask';
 import ShowImportant from '../pages/ShowImportant';
+import ShowCalendar from '../pages/ShowCalendar';
+
 
 function Main(props) {
 
@@ -46,6 +48,7 @@ function Main(props) {
         <Route path='/tasks/:category' element={<ShowList user={props.user} tasks={tasks} />} />
         <Route path='/tasks/:taskId/subtasks' element={<ShowTask user={props.user} />} />
         <Route path='/tasks/important' element={<ShowImportant user={props.user} /> } />
+        <Route path='/tasks/calendar' element={<ShowCalendar user={props.user} /> } />
       </Routes>
     </main>
   );

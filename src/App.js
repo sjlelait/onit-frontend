@@ -4,6 +4,7 @@ import './App.css';
 import Header from './components/Header';
 import Main from './components/Main';
 
+
 function App() {
   // FB - Set user state. Better in app.js because it can be shared between multiple pages/components.
   const [user, setUser] = useState(null);
