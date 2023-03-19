@@ -7,11 +7,11 @@ const Ellipses = (props) => {
     const { itemId } = props;
 
     
-    const [isEditing, setIsEditing] = useState(false);
     const [newTaskData, setNewTaskData] = useState({
         title: '',
         timeframe: ''
     });
+    const [isEditing, setIsEditing] = useState(false);
     const [isFormSubmitted, setIsFormSubmitted] = useState(false);
 
     // delete task
@@ -69,34 +69,29 @@ const Ellipses = (props) => {
     
       return (
         <DropdownButton variant="outline-secondary" title="...">
-        {isEditing && !isFormSubmitted ? (
             <Dropdown.Item onClick={handleDelete}>Delete</Dropdown.Item>
-        ) : null}
-        {isFormSubmitted ? null : (
             <Dropdown.Item onClick={handleEdit}>Edit</Dropdown.Item>
-        )}
-        
-        {isEditing ? (
-            <form onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    value={newTaskData.title}
-                    name="title"
-                    placeholder="change title"
-                    onChange={handleInputChange}
-                />
-                <input
-                    type="text"
-                    value={newTaskData.timeframe}
-                    name="timeframe"
-                    placeholder="00:00"
-                    onChange={handleInputChange}
-                />                 
-                <button type="submit">Save</button>
-            </form>
-        ) : null}
-    </DropdownButton>
-    );
+                {isEditing ? (
+                    <form onSubmit={handleSubmit}>
+                      <input
+                        type="text"
+                        value={newTaskData.title}
+                        name="title"
+                        placeholder="change title"
+                        onChange={handleInputChange}
+                        />
+                      <input
+                        type="text"
+                        value={newTaskData.timeframe}
+                        name="timeframe"
+                        placeholder="00:00"
+                        onChange={handleInputChange}
+                      />
+                      <button type="submit">Save</button>
+                    </form>
+                  ) : null}
+        </DropdownButton>
+        );          
     }
     
     export default Ellipses;
