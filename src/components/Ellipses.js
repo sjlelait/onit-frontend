@@ -64,6 +64,7 @@ const Ellipses = (props) => {
     const handleSubmit = async event => {
         event.preventDefault(); 
         await handleEditTask(itemId, newTaskData);
+        setIsEditing(false);
       };
     
       return (
