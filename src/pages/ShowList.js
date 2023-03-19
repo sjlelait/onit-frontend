@@ -160,6 +160,18 @@ const handleDelete = (itemId) => {
   setList(list.filter((list) => list._id !== itemId));
 };
 
+const handleEdit = (itemId, newData) => {
+  const updatedList = list.map((item) => {
+    if (item._id === itemId) {
+      return { ...item, ...newData };
+    }
+    return item;
+  });
+
+  // Set the list to the updated list
+  setList(updatedList);
+};
+
   //Loaded function for when data is fetched
   const loaded = () => {
     return (
@@ -194,7 +206,7 @@ const handleDelete = (itemId) => {
                  <span className="item-timeframe">{item.timeframe}</span>
                  </td>
                  <td>
-                  <Ellipses itemId={item._id} onDelete={handleDelete} user={props.user} />
+                  <Ellipses itemId={item._id} onDelete={handleDelete} onEdit={handleEdit} user={props.user} />
                 </td>
               </tr>
             </tbody>
