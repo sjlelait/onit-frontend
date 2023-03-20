@@ -1,18 +1,18 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { DropdownButton, Dropdown } from 'react-bootstrap';
-import { deleteItem, editItem } from '../helper';
+import { deleteItem, editItem, deleteSubtask } from '../helper';
 
 const Ellipses = (props) => {
     
-    const { itemId } = props;
+    const { itemId, page, subtaskId } = props;
 
     
-    const [isEditing, setIsEditing] = useState(false);
     const [newTaskData, setNewTaskData] = useState({
         title: '',
         timeframe: ''
     });
-    const [isFormSubmitted, setIsFormSubmitted] = useState(false);
+    const [isEditing, setIsEditing] = useState(false);
+    const [showDropdown, setShowDropdown] = useState(false);
 
     // delete task
     const handleDelete = async () => {
@@ -24,12 +24,20 @@ const Ellipses = (props) => {
         }
       };
 
-    // edit task
-    const handleEdit = (itemId) => {
-        setIsEditing(true);
-        setIsFormSubmitted(false);
-        console.log(itemId);
+      
+      // delete subtask
+      const handleDeleteSubtask = async () => {
+        const success = await deleteSubtask(props.itemId, props.subtaskId, props.user);
+        console.log(props.itemId);
+        console.log(props.subtaskId);
+        if (success) {
+          props.onDelete(props.subtaskId)
+        } else {
+          console.error('Failed to delete subtask');
+        }
       };
+      
+    // edit task
         
       const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -57,7 +65,7 @@ const Ellipses = (props) => {
             console.error(error);
             return false;
         }
-        setIsEditing(false);
+        setIsEditing(!isEditing);
         console.log(itemId);
     };
 
@@ -65,18 +73,25 @@ const Ellipses = (props) => {
         event.preventDefault(); 
         await handleEditTask(itemId, newTaskData);
         setIsEditing(false);
+        setShowDropdown(false);
       };
+
+      function handleDropdownToggle() {
+        setShowDropdown(!showDropdown);
+      }
     
       return (
-        <DropdownButton variant="outline-secondary" title="...">
-        {isEditing && !isFormSubmitted ? (
-            <Dropdown.Item onClick={handleDelete}>Delete</Dropdown.Item>
-        ) : null}
-        {isFormSubmitted ? null : (
-            <Dropdown.Item onClick={handleEdit}>Edit</Dropdown.Item>
+        <DropdownButton variant="outline-secondary" title="..." show={showDropdown} onClick={handleDropdownToggle}>
+        {page === 'tasks' && (
+        <>
+            <p>Edit Here</p>            
+        </>
         )}
-        
-        {isEditing ? (
+        {page === 'subtasks' && (
+        <>
+            <Dropdown.Item onClick={handleDeleteSubtask}>Delete</Dropdown.Item>
+         </>
+        )}        
             <form onSubmit={handleSubmit}>
                 <input
                     type="text"
@@ -91,12 +106,12 @@ const Ellipses = (props) => {
                     name="timeframe"
                     placeholder="00:00"
                     onChange={handleInputChange}
-                />                 
-                <button type="submit">Save</button>
-            </form>
-        ) : null}
+                />
+            <button type="submit">Save</button>
+        </form>
+        <Dropdown.Item onClick={handleDelete}>Delete</Dropdown.Item>
     </DropdownButton>
-    );
-    }
+    );          
+}
     
     export default Ellipses;
