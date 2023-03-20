@@ -92,7 +92,7 @@ const Ellipses = (props) => {
             <Dropdown.Item onClick={handleDeleteSubtask}>Delete</Dropdown.Item>
          </>
         )}        
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} onClick={(e) => e.stopPropagation()}>
                 <input
                     type="text"
                     value={newTaskData.title}
