@@ -1,7 +1,5 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import Ellipses from '../components/Ellipses';
-import { deleteSubtask } from '../helper';
 
 const ShowTask = (props) => {
   const { taskId } = useParams();
@@ -85,7 +83,7 @@ const ShowTask = (props) => {
     try {
       const token = await props.user.getIdToken();
       await fetch(
-        `https://onit-app.herokuapp.com/tasks/${taskId}/subtasks/${subtask._id}`,
+        `http://localhost:3001/tasks/${taskId}/subtasks/${subtask._id}`,
         {
           method: 'PUT',
           headers: {
@@ -95,25 +93,12 @@ const ShowTask = (props) => {
           body: JSON.stringify(subtasksCopy[foundSubtaskIndex]),
         }
       );
-      setNewSubtask((prevState) => ({ ...prevState, subtask: subtasksCopy }));
+      setTask((prevState) => ({ ...prevState, subtask: subtasksCopy }));
     } catch (error) {
       console.log(error);
     }
   };
 
-   // function to handle delete subtask
-   const handleDeleteSubtask = async (subtaskId) => {
-    console.log(subtaskId);
-    const success = await deleteSubtask(task._id, subtaskId, props.user);
-    if (success) {
-      const updatedSubtasks = task.subtask.filter(
-        (subtask) => subtask._id !== subtaskId
-      );
-      setTask({ ...task, subtask: updatedSubtasks });
-    } else {
-      console.error('Failed to delete subtask');
-    }
-  };
 
   const loaded = () => {
     return (
@@ -124,6 +109,7 @@ const ShowTask = (props) => {
         {task.subtask && task.subtask.length > 0 ? (
           task.subtask.map((subtask, index) => (
             <div>
+
               <div>
                 <div
                   key={subtask.id}
@@ -138,15 +124,6 @@ const ShowTask = (props) => {
                   {subtask.name} -{' '}
                   {subtask.complete ? 'Complete' : 'Incomplete'}
                 </div>
-              </div>
-              <div>
-              <Ellipses 
-                itemId={task._id} 
-                subtaskId={subtask._id} 
-                onDelete={handleDeleteSubtask} 
-                user={props.user} 
-                page={'subtasks'}
-              />
               </div>
             </div>
           ))
