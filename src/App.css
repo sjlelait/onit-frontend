@@ -126,6 +126,62 @@ main {
   width: 100%;
   color: var(--forum-seamoss);
   font-size: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+h1{
+  font-family: 'Montserrat';
+  font-size: 60px !important;
+  color: var(--forum-seamoss);
+  margin-top: 35px !important;
+}
+
+h2 {
+  font-family: 'Montserrat';
+  font-size: 50px !important;
+  color: var(--forum-seamoss);
+  margin-top: 35px !important;
+}
+
+.signUp {
+  background-color: var(--bg-green);
+  color: var(--forum-seamoss);
+  font-family: 'Montserrat';
+  font-size: 50px;
+}
+
+/* .login-one {
+  font-size: 30px !important;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+  text-decoration: underline;
+  margin-bottom: 50px;
+  margin-right:30px;
+} */
+
+.login-two {
+  background-color: #f9bc60;
+  font-size:40px !important;
+  color: #001e1d !important;
+  border-radius: 25px;
+  padding: 10px 25px;
+  box-shadow: 0px 5px 15px rgba(249, 188, 96, 0.4);
+  transition: all 0.3s ease;
+  width: 35%;
+  text-decoration: underline;
+}
+
+.login-two:hover {
+  background-color: #ffc981;
+  box-shadow: 0px 8px 20px rgba(249, 188, 96, 0.6);
+}
+
+.login-two:active {
+  background-color: #ecae3c;
+  box-shadow: 0px 2px 5px rgba(249, 188, 96, 0.8);
 }
 
 .navbar .hamburger {
@@ -206,6 +262,67 @@ ul.button-container {
   height: 60px;
 }
 
+.date, .feeling{
+  font-size: larger;
+  font-weight: bold;
+}
+.react-calendar__tile{
+  height: 100px;
+  width: 100px;
+}
+.calendar-page{
+  height: 100vh;
+}
+
+.react-calendar{
+  align-items: center;
+  margin: 0 auto;
+  width: 700px;
+  max-width: 100%;
+  padding: 50px;
+  color:white;
+  background-color: #a2b5b5;
+  text-decoration: none;
+  border-radius: 4%;
+}
+
+.react-calendar__navigation > button{
+  background-color: #a2b5b5;
+  box-shadow: none;
+  border: 1px solid white;
+  color: #004643;
+}
+.react-calendar__year-view__months > button{
+  background-color: #a2b5b5;
+  box-shadow: none;
+  border: 1px solid white;
+  color: #004643;
+}
+.react-calendar__decade-view__years > button{
+  background-color: #a2b5b5;
+  box-shadow: none;
+  border: 1px solid white;
+  color: #004643;
+}
+.react-calendar__month-view__weekdays{
+  color: #004643;
+  text-decoration: underline;
+}
+.react-calendar__month-view__days > button{
+  background-color: #a2b5b5;
+  box-shadow: none;
+  border-radius: 5%;
+  height: 100px;
+  border: 1px solid white;
+}
+.emotion-btns{
+  height: 80px;
+}
+
+.btn-outline-light{
+  margin-right: 5px;
+}
+
 /* Responsive Header */
 /* Default styles for mobile devices */
 .navbar {
@@ -237,6 +354,34 @@ ul.button-container {
     font-size: 25px !important;
   }
 }
+
+.features-benefits {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
+
+.features-benefits li{
+  display: inline-block;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #F9BC60 ;
+  color: #001E1D;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  box-shadow: 0 2px 2px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+}
+
+.task-list li:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 4px rgba(0,0,0,0.3);
+}
+
+
 
 @media (min-width: 420px) {
   .user-info {
@@ -315,7 +460,6 @@ ul.button-container {
   }
 }
 
-
 @media (min-width: 1200px) {
   .index-buttons {
     width: calc(20% - 20px); /* Subtract the horizontal padding */
@@ -343,7 +487,6 @@ input::placeholder {
   display: none;
 }
 
-
 /* Responsive table */
 
 /* CSS code for the ShowList component */
@@ -357,7 +500,8 @@ table {
 }
 
 /* Default styles for table cells */
-td, th {
+td,
+th {
   padding: 8px;
   border: 1px solid #ddd;
   /* Add other styles as needed */
@@ -366,15 +510,17 @@ td, th {
 /* Media queries for different viewport sizes */
 @media only screen and (min-width: 320px) {
   /* Styles for viewports 320px and above */
-  td, th {
-    font-size: 12px;
+  td,
+  th {
+    font-size: 14px;
     padding: 4px;
   }
 }
 
 @media only screen and (min-width: 480px) {
   /* Styles for viewports 480px and above */
-  td, th {
+  td,
+  th {
     font-size: 20px;
     padding: 8px;
   }
@@ -382,7 +528,8 @@ td, th {
 
 @media only screen and (min-width: 768px) {
   /* Styles for viewports 768px and above */
-  td, th {
+  td,
+  th {
     font-size: 25px;
     padding: 12px;
   }
@@ -390,7 +537,8 @@ td, th {
 
 @media only screen and (min-width: 992px) {
   /* Styles for viewports 992px and above */
-  td, th {
+  td,
+  th {
     font-size: 30px;
     padding: 16px;
   }
@@ -398,9 +546,11 @@ td, th {
 
 @media only screen and (min-width: 1200px) {
   /* Styles for viewports 1200px and above */
-  td, th {
+  td,
+  th {
     font-size: 35px;
     padding: 20px;
+
   }
 }
 
