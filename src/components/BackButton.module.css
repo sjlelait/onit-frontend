@@ -1,0 +1,19 @@
+.goBack {
+    font-size: 30px;
+    font-weight: bold;
+    border: 1px solid white;
+    cursor: pointer;
+    text-decoration: none;
+    padding: 10px 20px;
+    margin-top: 20px;
+    border-radius: 5px;
+    left: 20px;
+    bottom: 20px;
+    transition: background-color 0.3s, color 0.3s;
+    font-family: 'Helvetica Neue', sans-serif;
+  }
+  
+  .goBack:hover {
+    background-color: white;
+    color: #4CAF50;
+  }

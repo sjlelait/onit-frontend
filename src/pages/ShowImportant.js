@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
-import Ellipses from "../components/Ellipses";
 
 const ShowImportant = (props) => {
-  const url = "http://localhost:3001/tasks/important";
+  const url = "https://onit-app.herokuapp.com/tasks/important";
   const [task, setTask] = useState([]);
 
   const getTask = async () => {
@@ -24,11 +23,7 @@ const ShowImportant = (props) => {
     }
   }, [props.user]);
   
-  
-  // functions to handle delete & edit
-const handleDelete = (itemId) => {
-  setTask(task.filter((task) => task._id !== itemId));
-};
+
 
     // not working quite yet
 const handleEdit = async (itemId, newData) => {
@@ -50,13 +45,14 @@ const handleEdit = async (itemId, newData) => {
 
 const loaded = () => {
   return (
-    <div>
+    <div className="container">
       <h1>Important Tasks</h1>
         {task.map(task => (
-          <p key={task._id}>
-            <Link to={`/tasks/${task._id}/subtasks`}>{task.title}</Link>
-            <Ellipses itemId={task._id} onDelete={handleDelete} onEdit={handleEdit} user={props.user} />
-          </p>
+
+          <ul className="important" key={task._id}>
+            <p className="star">★ </p>
+            <Link className="link" to={`/tasks/${task._id}/subtasks`}>{task.title}</Link>
+          </ul>
         ))}
       </div>
     );

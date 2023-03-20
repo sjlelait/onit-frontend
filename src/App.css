@@ -16,7 +16,7 @@ html {
   background: var(--bg-green);
 }
 
-body{
+body {
   font-family: 'Montserrat';
 }
 
@@ -65,7 +65,7 @@ body{
 
 .crossed-line {
   text-decoration: line-through;
-  color: red
+  color: red;
 }
 
 .navbar {
@@ -75,36 +75,33 @@ body{
 }
 
 .hamburger-menu {
-  display:flex;
+  display: flex;
   flex-direction: row;
   align-items: flex-end;
-  float:right;
+  float: right;
   justify-content: center;
   background-color: var(--space-grey);
   color: #004643 !important;
   padding-right: 70px;
-  font-size:30px;
+  font-size: 30px;
   width: 300px;
-  margin-top:5px;
+  margin-top: 5px;
 }
 
 .button-container {
-  padding: 0 10px; 
+  padding: 0 10px;
 }
-
 
 .navbar-brand-link {
   color: var(--forum-seamoss) !important;
-  margin-left:18px;
+  margin-left: 18px;
   font-size: 50px !important;
 }
-
 
 .user-info {
   display: flex;
   align-items: center;
   font-size: 30px;
- 
 }
 
 .user-image-container {
@@ -121,7 +118,6 @@ body{
 }
 
 nav {
-
 }
 
 main {
@@ -130,7 +126,6 @@ main {
   width: 100%;
   color: var(--forum-seamoss);
   font-size: 30px;
- 
 }
 
 .navbar .hamburger {
@@ -142,12 +137,11 @@ main {
   .hamburger-menu {
     width: 100%;
     padding-right: 0;
-    display:flex;
+    display: flex;
     align-items: center;
     justify-content: center;
   }
 }
-
 
 @media (max-width: 500px) {
   .navbar .hamburger {
@@ -157,10 +151,9 @@ main {
   }
 }
 
-
-.quote{
+.quote {
   width: 100%;
-  padding:5px;
+  padding: 5px;
   font-size: 30px !important;
 }
 
@@ -169,37 +162,35 @@ ul.button-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: 0 auto; 
+  margin: 0 auto;
   padding: 0;
   overflow: word-wrap;
   background-color: var(--bg-green);
-  width: 60%; 
+  width: 60%;
 }
 
-
-.index-buttons{
-background-color: var(--btn-yellow) !important;
-color: black !important;;
-font-family: "montserrat";
-border-color: var(--btn-yellow) !important;
-border-radius: 0px !important;
-margin-bottom: 9px;
-width: 100% !important;
-word-wrap: break-word;
-font-size: 30px !important;
-}
-
-.index-form{
+.index-buttons {
+  background-color: var(--btn-yellow) !important;
+  color: black !important;
+  font-family: 'montserrat';
+  border-color: var(--btn-yellow) !important;
+  border-radius: 0px !important;
+  margin-bottom: 9px;
+  width: 100% !important;
+  word-wrap: break-word;
   font-size: 30px !important;
 }
 
-.index-form input{
+.index-form {
+  font-size: 30px !important;
+}
+
+.index-form input {
   width: 60%;
   height: 50px;
   margin: 5px;
   border: 1px solid #ccc;
   border-radius: 5px 5px 5px 5px;
-
 }
 
 .index-form-button {
@@ -211,9 +202,8 @@ font-size: 30px !important;
   font-size: 30px;
   border: 1px solid black;
   border-radius: 5px 5px 5px 5px;
-  width: 60px; 
-  height: 60px; 
-
+  width: 60px;
+  height: 60px;
 }
 
 .date, .feeling{
@@ -294,60 +284,58 @@ font-size: 30px !important;
 
   .user-info {
     font-size: 16px;
-    }
-    .user-image {
-      width: 55px;
-      height: 55px;
-      object-fit: cover; /* To maintain the aspect ratio of the image */
-      margin-right: 10px;
-    }
+  }
+  .user-image {
+    width: 55px;
+    height: 55px;
+    object-fit: cover; /* To maintain the aspect ratio of the image */
+    margin-right: 10px;
+  }
 
-    .navbar-brand-link {
-      color: var(--forum-seamoss) !important;
-      margin-left:18px;
-      font-size: 25px !important;
-    }
+  .navbar-brand-link {
+    color: var(--forum-seamoss) !important;
+    margin-left: 18px;
+    font-size: 25px !important;
+  }
 }
 
 @media (min-width: 420px) {
   .user-info {
-      font-size: 18px;
-      }
-      .user-image {
-        width: 55px;
-        height: 55px;
-        object-fit: cover; /* To maintain the aspect ratio of the image */
-        margin-right: 10px;
-      }
+    font-size: 18px;
+  }
+  .user-image {
+    width: 55px;
+    height: 55px;
+    object-fit: cover; /* To maintain the aspect ratio of the image */
+    margin-right: 10px;
+  }
 
-      .navbar-brand-link {
-        color: var(--forum-seamoss) !important;
-        margin-left:18px;
-        font-size: 25px !important;
-      }
-  
+  .navbar-brand-link {
+    color: var(--forum-seamoss) !important;
+    margin-left: 18px;
+    font-size: 25px !important;
+  }
 }
 
 @media (min-width: 576px) {
   .index-buttons {
     width: calc(50% - 20px); /* Subtract the horizontal padding */
-   
   }
   .user-info {
-    font-size: 20px ;
-    }
-    .user-image {
-      width: 55px;
-      height: 55px;
-      object-fit: cover; /* To maintain the aspect ratio of the image */
-      margin-right: 10px;
-    }
+    font-size: 20px;
+  }
+  .user-image {
+    width: 55px;
+    height: 55px;
+    object-fit: cover; /* To maintain the aspect ratio of the image */
+    margin-right: 10px;
+  }
 
-    .navbar-brand-link {
-      color: var(--forum-seamoss) !important;
-      margin-left:18px;
-      font-size: 25px !important;
-    }
+  .navbar-brand-link {
+    color: var(--forum-seamoss) !important;
+    margin-left: 18px;
+    font-size: 25px !important;
+  }
 }
 
 @media (min-width: 768px) {
@@ -362,15 +350,15 @@ font-size: 30px !important;
     margin-right: 10px;
   }
 
-.user-info {
-    font-size: 20px ;
-    }
+  .user-info {
+    font-size: 20px;
+  }
 
-    .navbar-brand-link {
-      color: var(--forum-seamoss) !important;
-      margin-left:18px;
-      font-size: 30px !important;
-    }
+  .navbar-brand-link {
+    color: var(--forum-seamoss) !important;
+    margin-left: 18px;
+    font-size: 30px !important;
+  }
 }
 
 @media (min-width: 992px) {
@@ -379,14 +367,15 @@ font-size: 30px !important;
   }
 
   .user-info {
-    font-size: 30px ;
-    }
-    .navbar-brand-link {
-      color: var(--forum-seamoss) !important;
-      margin-left:18px;
-      font-size: 40px !important;
-    }
+    font-size: 30px;
+  }
+  .navbar-brand-link {
+    color: var(--forum-seamoss) !important;
+    margin-left: 18px;
+    font-size: 40px !important;
+  }
 }
+
 
 @media (min-width: 1200px) {
   .index-buttons {
@@ -394,13 +383,89 @@ font-size: 30px !important;
   }
 
   .user-info {
-    font-size: 30px ;
-    }
+    font-size: 30px;
+  }
 
-    .navbar-brand-link {
-      color: var(--forum-seamoss) !important;
-      margin-left:18px;
-      font-size: 50px !important;
-    }
+  .navbar-brand-link {
+    color: var(--forum-seamoss) !important;
+    margin-left: 18px;
+    font-size: 50px !important;
+  }
+}
 
+input::placeholder {
+  color: Black;
+  font-size: 25px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.index-form-button#category {
+  display: none;
+}
+
+
+/* Responsive table */
+
+/* CSS code for the ShowList component */
+
+/* Default styles for table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  /* Add other styles as needed */
+  padding-top: 20px; /* Add padding to top of table to avoid overlap with progress bar */
+}
+
+/* Default styles for table cells */
+td, th {
+  padding: 8px;
+  border: 1px solid #ddd;
+  /* Add other styles as needed */
+}
+
+/* Media queries for different viewport sizes */
+@media only screen and (min-width: 320px) {
+  /* Styles for viewports 320px and above */
+  td, th {
+    font-size: 12px;
+    padding: 4px;
+  }
+}
+
+@media only screen and (min-width: 480px) {
+  /* Styles for viewports 480px and above */
+  td, th {
+    font-size: 20px;
+    padding: 8px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  /* Styles for viewports 768px and above */
+  td, th {
+    font-size: 25px;
+    padding: 12px;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  /* Styles for viewports 992px and above */
+  td, th {
+    font-size: 30px;
+    padding: 16px;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  /* Styles for viewports 1200px and above */
+  td, th {
+    font-size: 35px;
+    padding: 20px;
+  }
+}
+
+/* CSS for progress bar */
+.progressBar {
+  margin-bottom: 20px; /* Add margin to bottom of progress bar to avoid overlap with table */
 }

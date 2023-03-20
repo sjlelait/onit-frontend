@@ -18,9 +18,14 @@ form > button {
   font-weight: 500;
 }
 form > button:hover {
-  background-color: var(--bg-green);
-  color: var(--btn-yellow);
+  opacity: 0.9;
 }
+
+form > button:active {
+  opacity: 0.9;
+  transform: translateY(2px);
+}
+
 form > button, form > input {
   color: var(--btn-fontcolor);
   border: 0;
@@ -33,7 +38,7 @@ form > button, form > input {
   width: 70%;
 }
 
-.table {
+.table, ul {
   background-color: var(--space-grey);
   color: var(--btn-fontcolor);
 }
@@ -51,4 +56,29 @@ form > button, form > input {
 
 .checkbox {
   transform: scale(2);
+  padding: 2px;
+}
+
+.important {
+  padding: 5%;
+}
+.star {
+  float: left;
+  padding-right: 5px;
+  color: var(--btn-yellow);
+}
+.link {
+  color: var(--bg-green);
+}
+.link:visited {
+  color: var(--bg-green);
+}
+
+.link:hover {
+  color: var(--btn-yellow);
+}
+
+.sub-checkbox, .checkbox {
+  margin: 10px;
+  color: var(--btn-yellow);
 }
