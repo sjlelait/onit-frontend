@@ -66,7 +66,7 @@ const ShowTask = (props) => {
 
   useEffect(() => {
     getTask();
-  }, []);
+  }, [props.user]);
 
   const handleClickComplete = async (subtask) => {
     console.log(props.user);
@@ -119,8 +119,7 @@ const ShowTask = (props) => {
                     onChange={() => handleClickComplete(subtask)}
                     className='sub-checkbox'
                   />
-                  {subtask.name} -{' '}
-                  {subtask.complete ? 'Complete' : 'Incomplete'}
+                  {subtask.name}
                 </div>
               </div>
             </div>
