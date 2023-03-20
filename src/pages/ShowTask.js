@@ -83,7 +83,7 @@ const ShowTask = (props) => {
     try {
       const token = await props.user.getIdToken();
       await fetch(
-        `http://localhost:3001/tasks/${taskId}/subtasks/${subtask._id}`,
+        `https://onit-app.herokuapp.com/tasks/${taskId}/subtasks/${subtask._id}`,
         {
           method: 'PUT',
           headers: {
