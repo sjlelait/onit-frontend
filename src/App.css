@@ -206,6 +206,67 @@ ul.button-container {
   height: 60px;
 }
 
+.date, .feeling{
+  font-size: larger;
+  font-weight: bold;
+}
+.react-calendar__tile{
+  height: 100px;
+  width: 100px;
+}
+.calendar-page{
+  height: 100vh;
+}
+
+.react-calendar{
+  align-items: center;
+  margin: 0 auto;
+  width: 700px;
+  max-width: 100%;
+  padding: 50px;
+  color:white;
+  background-color: #a2b5b5;
+  text-decoration: none;
+  border-radius: 4%;
+}
+
+.react-calendar__navigation > button{
+  background-color: #a2b5b5;
+  box-shadow: none;
+  border: 1px solid white;
+  color: #004643;
+}
+.react-calendar__year-view__months > button{
+  background-color: #a2b5b5;
+  box-shadow: none;
+  border: 1px solid white;
+  color: #004643;
+}
+.react-calendar__decade-view__years > button{
+  background-color: #a2b5b5;
+  box-shadow: none;
+  border: 1px solid white;
+  color: #004643;
+}
+.react-calendar__month-view__weekdays{
+  color: #004643;
+  text-decoration: underline;
+}
+.react-calendar__month-view__days > button{
+  background-color: #a2b5b5;
+  box-shadow: none;
+  border-radius: 5%;
+  height: 100px;
+  border: 1px solid white;
+}
+.emotion-btns{
+  height: 80px;
+}
+
+.btn-outline-light{
+  margin-right: 5px;
+}
+
 /* Responsive Header */
 /* Default styles for mobile devices */
 .navbar {

@@ -4,7 +4,9 @@ import Index from '../pages/Index';
 import ShowList from '../pages/ShowList';
 import ShowTask from '../pages/ShowTask';
 import ShowImportant from '../pages/ShowImportant';
+import ShowCalendar from '../pages/ShowCalendar';
 import BackButton from './BackButton';
+
 
 function Main(props) {
   const [tasks, setTasks] = useState(null);
@@ -66,6 +68,14 @@ function Main(props) {
               <BackButton />
             </>
           }
+        />
+      <Route
+        path='/tasks/calendar'
+        element={
+         <>
+          <ShowCalendar user={props.user} /> } 
+          <BackButton />
+         </>
         />
       </Routes>
     </main>
