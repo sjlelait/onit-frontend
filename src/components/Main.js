@@ -73,9 +73,10 @@ function Main(props) {
         path='/tasks/calendar'
         element={
          <>
-          <ShowCalendar user={props.user} /> } 
           <BackButton />
+          <ShowCalendar user={props.user} /> 
          </>
+        }
         />
       </Routes>
     </main>

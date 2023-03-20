@@ -83,7 +83,7 @@ const ShowTask = (props) => {
     try {
       const token = await props.user.getIdToken();
       await fetch(
-        `http://localhost:3001/tasks/${taskId}/subtasks/${subtask._id}`,
+        `http://onit-app.herokuapp.com/tasks/${taskId}/subtasks/${subtask._id}`,
         {
           method: 'PUT',
           headers: {
@@ -99,7 +99,6 @@ const ShowTask = (props) => {
     }
   };
 
-
   const loaded = () => {
     return (
       <div>
@@ -109,7 +108,6 @@ const ShowTask = (props) => {
         {task.subtask && task.subtask.length > 0 ? (
           task.subtask.map((subtask, index) => (
             <div>
-
               <div>
                 <div
                   key={subtask.id}
@@ -118,7 +116,7 @@ const ShowTask = (props) => {
                   <input
                     type='checkbox'
                     checked={subtask.complete}
-                    onChange={() => handleClickComplete(subtask)} 
+                    onChange={() => handleClickComplete(subtask)}
                     className='sub-checkbox'
                   />
                   {subtask.name} -{' '}
