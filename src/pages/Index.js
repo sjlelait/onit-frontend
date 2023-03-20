@@ -25,9 +25,7 @@ function Index(props) {
   const [data, setData] = useState(null);
 
   const quoteapi = () => {
-    if (data) {
-      const index = Math.floor(Math.random() * data.length);
-      const quote = data[index];
+    if (selectedQuote) {
       return (
         <div>
           <div className='date'><Date/></div>
@@ -38,21 +36,28 @@ function Index(props) {
           </Link>
           <br />
           <div className='quote'>
-            <p>{quote.text}</p>
-            <p>- {quote.author}</p>
+            <p>{selectedQuote.text}</p>
+            <p>- {selectedQuote.author}</p>
           </div>
         </div>
       );
     }
   };
+  
+
+  const [selectedQuote, setSelectedQuote] = useState(null);
+
 
   useEffect(() => {
     async function fetchData() {
       const result = await getapi(api_url);
       setData(result);
+      const index = Math.floor(Math.random() * result.length);
+      setSelectedQuote(result[index]);
     }
     fetchData();
   }, []);
+  
 
   const handleChange = (event) => {
     if (event.target.name === 'category') {
@@ -80,7 +85,7 @@ function Index(props) {
         },
         body: JSON.stringify({
           category: category,
-          title: title || 'Untitled',
+          title: title || 'Select ellipses to edit',
         }),
       });
       const data = await response.json();
