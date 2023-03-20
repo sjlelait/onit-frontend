@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import { Navbar, Nav } from 'react-bootstrap';
 import { login, logout } from '../firebase';
+import Date from '../components/Date'
+import Feeling from '../components/Feeling'
 
 function Index(props) {
   const [tasks, setTasks] = useState([]);
@@ -19,6 +21,7 @@ function Index(props) {
     console.log(data);
     return data;
   }
+
   const [data, setData] = useState(null);
 
   const quoteapi = () => {
@@ -27,6 +30,13 @@ function Index(props) {
       const quote = data[index];
       return (
         <div>
+          <div className='date'><Date/></div>
+          
+          <br/>
+          <Link to={`/tasks/calendar`}>
+          <div className='feeling'><Feeling/></div>
+          </Link>
+          <br />
           <div className='quote'>
             <p>{quote.text}</p>
             <p>- {quote.author}</p>
