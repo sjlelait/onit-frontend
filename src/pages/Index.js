@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import { Navbar, Nav } from 'react-bootstrap';
 import { login, logout } from '../firebase';
-import Date from '../components/Date'
-import Feeling from '../components/Feeling'
+import Date from '../components/Date';
+import Feeling from '../components/Feeling';
 
 function Index(props) {
   const [tasks, setTasks] = useState([]);
@@ -25,31 +25,37 @@ function Index(props) {
   const [data, setData] = useState(null);
 
   const quoteapi = () => {
-    if (data) {
-      const index = Math.floor(Math.random() * data.length);
-      const quote = data[index];
+    if (selectedQuote) {
       return (
         <div>
-          <div className='date'><Date/></div>
-          
-          <br/>
+          <div className='date'>
+            <Date />
+          </div>
+
+          <br />
           <Link to={`/tasks/calendar`}>
-          <div className='feeling'><Feeling/></div>
+            <div className='feeling'>
+              <Feeling />
+            </div>
           </Link>
           <br />
           <div className='quote'>
-            <p>{quote.text}</p>
-            <p>- {quote.author}</p>
+            <p className='quote-text'>{selectedQuote.text}</p>
+            <p className='quote-text'>- {selectedQuote.author}</p>
           </div>
         </div>
       );
     }
   };
 
+  const [selectedQuote, setSelectedQuote] = useState(null);
+
   useEffect(() => {
     async function fetchData() {
       const result = await getapi(api_url);
       setData(result);
+      const index = Math.floor(Math.random() * result.length);
+      setSelectedQuote(result[index]);
     }
     fetchData();
   }, []);
@@ -80,7 +86,7 @@ function Index(props) {
         },
         body: JSON.stringify({
           category: category,
-          title: title || 'Untitled',
+          title: title || 'Select ellipses to edit',
         }),
       });
       const data = await response.json();
@@ -181,9 +187,11 @@ function Index(props) {
             <span className='signUp'>Log in to get started!</span>
           </p>
           <br></br>
-            <Nav.Link className="login-two" onClick={login}>Login</Nav.Link>
+          <Nav.Link className='login-two' onClick={login}>
+            Login
+          </Nav.Link>
           <h2>Features</h2>
-          <ul className="features-benefits">
+          <ul className='features-benefits'>
             <li>Task lists</li>
             <li>Reminders</li>
             <li>Categorization</li>
@@ -200,7 +208,7 @@ function Index(props) {
             and has helped me stay on top of my workload." - John Smith
           </blockquote>
           <h2>Benefits</h2>
-          <ul className="features-benefits">
+          <ul className='features-benefits'>
             <li>Increased productivity</li>
             <li>Improved organization</li>
             <li>Reduced stress</li>
@@ -208,8 +216,10 @@ function Index(props) {
           <h2>About</h2>
           <p>
             Onit was founded in 2023 with the mission of helping people stay
-            organized and productive, while maintaining their mental health. <br></br><br></br>Our team is dedicated to creating the best
-            task management app on the market.
+            organized and productive, while maintaining their mental health.{' '}
+            <br></br>
+            <br></br>Our team is dedicated to creating the best task management
+            app on the market.
           </p>
         </>
       ) : (
