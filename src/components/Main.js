@@ -7,10 +7,9 @@ import ShowImportant from '../pages/ShowImportant';
 import ShowCalendar from '../pages/ShowCalendar';
 import BackButton from './BackButton';
 
-
 function Main(props) {
   const [tasks, setTasks] = useState(null);
-  const API_URL = 'https://onit-app.herokuapp.com/home';
+  const API_URL = 'https://onit-app-api.herokuapp.com/home';
 
   const getTask = async () => {
     let token;
@@ -46,7 +45,7 @@ function Main(props) {
           path='/tasks/:category'
           element={
             <>
-            <BackButton />
+              <BackButton />
               <ShowList user={props.user} tasks={tasks} />
             </>
           }
@@ -55,7 +54,7 @@ function Main(props) {
           path='/tasks/:taskId/subtasks'
           element={
             <>
-             <BackButton />
+              <BackButton />
               <ShowTask user={props.user} />
             </>
           }
@@ -69,14 +68,14 @@ function Main(props) {
             </>
           }
         />
-      <Route
-        path='/tasks/calendar'
-        element={
-         <>
-          <BackButton />
-          <ShowCalendar user={props.user} /> 
-         </>
-        }
+        <Route
+          path='/tasks/calendar'
+          element={
+            <>
+              <BackButton />
+              <ShowCalendar user={props.user} />
+            </>
+          }
         />
       </Routes>
     </main>
