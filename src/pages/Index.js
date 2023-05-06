@@ -78,7 +78,7 @@ function Index(props) {
     );
     try {
       const token = await props.user.getIdToken();
-      const response = await fetch('https://onit-app.herokuapp.com/tasks', {
+      const response = await fetch('https://onit-app-api.herokuapp.com/tasks', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -107,7 +107,7 @@ function Index(props) {
     setCategoryPlaceholder('+ Add a category');
   };
 
-  const API_URL = 'https://onit-app.herokuapp.com/home';
+  const API_URL = 'https://onit-app-api.herokuapp.com/home';
 
   const getTasks = async () => {
     try {

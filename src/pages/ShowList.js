@@ -30,7 +30,7 @@ const ShowList = (props) => {
 
   const { category } = useParams();
 
-  const url = ` https://onit-app.herokuapp.com/tasks/${category}`;
+  const url = ` https://onit-app-api.herokuapp.com/tasks/${category}`;
 
   // State to hold the list data
   const [list, setList] = useState(null);
@@ -105,7 +105,7 @@ const ShowList = (props) => {
     console.log(updatedTask);
     try {
       const token = await props.user.getIdToken();
-      await fetch(`https://onit-app.herokuapp.com/tasks/${task._id}`, {
+      await fetch(`https://onit-app-api.herokuapp.com/tasks/${task._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -130,7 +130,7 @@ const ShowList = (props) => {
 
     try {
       const token = await props.user.getIdToken();
-      await fetch(`https://onit-app.herokuapp.com/tasks/${task._id}`, {
+      await fetch(`https://onit-app-api.herokuapp.com/tasks/${task._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -168,17 +168,17 @@ const ShowList = (props) => {
     setCompletedPercentage(percentage);
   };
 
-const handleEdit = (itemId, newData) => {
-  const updatedList = list.map((item) => {
-    if (item._id === itemId) {
-      return { ...item, ...newData };
-    }
-    return item;
-  });
+  const handleEdit = (itemId, newData) => {
+    const updatedList = list.map((item) => {
+      if (item._id === itemId) {
+        return { ...item, ...newData };
+      }
+      return item;
+    });
 
-  // Set the list to the updated list
-  setList(updatedList);
-};
+    // Set the list to the updated list
+    setList(updatedList);
+  };
 
   //Loaded function for when data is fetched
   const loaded = () => {
@@ -221,8 +221,14 @@ const handleEdit = (itemId, newData) => {
                 <td>
                   <span className='item-timeframe'>{item.timeframe}</span>
                 </td>
-                 <td>
-                  <Ellipses itemId={item._id} onDelete={handleDelete} onEdit={handleEdit} user={props.user} page={'tasks'}/>
+                <td>
+                  <Ellipses
+                    itemId={item._id}
+                    onDelete={handleDelete}
+                    onEdit={handleEdit}
+                    user={props.user}
+                    page={'tasks'}
+                  />
                 </td>
               </tr>
             </tbody>
