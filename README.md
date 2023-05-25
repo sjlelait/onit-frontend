@@ -4,11 +4,17 @@ Not your average "to-do" application. With Onit a user can not only create a to 
 
 ## Technologies Used
 
-- React.js
-- Mongoose
-- MongoDB
-- CSS3
-- HTML5
+- MongoDB/Mongoose
+- Express
+- React
+- Node.JS
+- AJAX
+- React-Bootstrap
+- CSS
+- Javascript/ JSX
+- Type Fit API
+- Firebase Authentication/Authorization
+- Deployed on Heroku & Netlify
 
 ## Screenshots of the App
 
@@ -21,4 +27,5 @@ Not your average "to-do" application. With Onit a user can not only create a to 
 - A "reward" when you have reached your goals
 - Have a separate UI for children and adults
 
+### Click [Here](https://github.com/sjlelait/onit-backend) to view the backend repo.
 ## [Launch the App](https://onit-notes.netlify.app/)
